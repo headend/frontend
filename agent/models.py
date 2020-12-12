@@ -5,8 +5,9 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = True` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
-from django.db import models
 
+from django.db import models
+from django.contrib.auth.models import User
 
 class Agent(models.Model):
     ip_control = models.CharField(primary_key=True, max_length=15)
@@ -23,6 +24,16 @@ class Agent(models.Model):
     class Meta:
         managed = True
         db_table = 'agent'
+
+
+class AgentHasGroupProfile(models.Model):
+    agent_ip_control = models.ForeignKey(Agent, models.DO_NOTHING, db_column='agent_ip_control', primary_key=True)
+    group_profile_name = models.ForeignKey('GroupProfile', models.DO_NOTHING, db_column='group_profile_name')
+
+    class Meta:
+        managed = True
+        db_table = 'agent_has_group_profile'
+        unique_together = (('agent_ip_control', 'group_profile_name'),)
 
 
 class AgentHasVlan(models.Model):
@@ -175,7 +186,7 @@ class SatelliteDisheHasMulticastIp(models.Model):
         db_table = 'satellite_dishe_has_multicast_ip'
         unique_together = (('satellite_dishe', 'multicast_ip_ip'),)
 
-
+"""
 class User(models.Model):
     username = models.CharField(unique=True, max_length=30, blank=True, null=True)
     email = models.CharField(max_length=60, blank=True, null=True)
@@ -185,7 +196,7 @@ class User(models.Model):
     class Meta:
         managed = True
         db_table = 'user'
-
+"""
 
 class UserHasMulticastIp(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING, primary_key=True)
