@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="/static/homepage/css/upload_file.css" rel="stylesheet">
+<!------ Include the above in your HEAD tag ---------->
+<div class="container">
+  <form action="/patch/upload/" method="POST" enctype="multipart/form-data" onsubmit="return uploadFileSubmitCheck(this);">
+    <div class="row">
+        {% csrf_token %}
+        <div class="column col-md-12">
+          <div class="form-group files">
+            <input type="file" name="files" title="Chose the file" class="form-control" multiple id="files">
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <span class="column col-md-6">
+        <label class="checkbox-inline" >
+          <input type="radio" name="overwrite" class="radio" value="0" checked="checked"> Báo lỗi, không up tất cả file khi phát hiện trùng tên.
+        </label>
+      </span>
+      <span class="column col-md-6">
+        <label class="checkbox-inline">
+          <input type="radio" name="overwrite" class="radio" value="1"> Ghi đè file trùng tên, up file bình thường.
+        </label>
+      </span>
+    </div>
+    <div class="row">
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Upload File" title="Up load to CDN" />
+    </div>
+  </form>
+</div>
+{% endblock %}
