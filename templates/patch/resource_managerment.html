@@ -1,0 +1,186 @@
+<div class="app-title">
+<div>
+  <h1><i class="fa fa-th-list"></i>
+    <a href="/patch/resource/"> Update Client</a>
+  </h1>
+  
+</div>
+<ul class="app-breadcrumb breadcrumb side">
+  <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+  <li class="breadcrumb-item">Patch</li>
+  <li class="breadcrumb-item active"><a href="/patch/resource/">Update Client</a> </li>
+</ul>
+</div>
+
+
+<div class="row">
+  <div class="clearix"></div>
+  <div class="col-md-6">
+    <div class="tile">
+      [localtest] running client version
+      <div class="tile-body">
+        <table class="table table-hover table-bordered" id="dataTable">
+          <thead>
+            <tr>
+              <th>ios</th>
+              <th>android</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ data.current_client_version.test.ios }}</td>
+              <td>{{ data.current_client_version.test.android }}</td>
+            </tr>
+          </tbody>  
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="tile">
+      [REAL] running client version
+      <div class="tile-body">
+        <table class="table table-hover table-bordered" id="dataTable">
+          <thead>
+            <tr>
+              <th>ios</th>
+              <th>android</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ data.current_client_version.real.ios }}</td>
+              <td>{{ data.current_client_version.real.android }}</td>
+            </tr>
+          </tbody>  
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+</div> <!-- end row  -->
+
+
+
+
+<div class="row">
+  <div class="clearix"></div>
+  <div class="col-md-12">
+    <div class="tile">
+      <div class="tile-body">
+        <table class="table table-hover table-bordered" id="dataTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Size</th>
+              <th>Version</th>
+              <th>Flatform</th>
+              <th>CDN Localtest</th>
+              <th>Aplly Local</th>
+              <th>CDN Real</th>
+              <th>Aplly Real</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for resource in data.resource %}
+                {% if resource.flatform == 'ios' %}
+                <tr>
+                  <td>{{ resource.name }}</td>
+                  <td>{{ resource.size }}</td>
+                  <td>{{ resource.version }}</td>
+                  <td>{{ resource.flatform }}</td>
+                  <td>
+                    {% if resource.action %}
+                    <button id="{{ resource.name }}" name= "test" type="button" class="btn btn-primary" onclick="uploadCDN(this)">
+                      <span><strong>Upload CDN Localtest</strong></span>
+                    </button>
+                    {% else %}
+                    Done
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if resource.action %}
+                    <button id="{{ resource.name }}" name= "test" type="button" class="btn btn-primary" onclick="resourceApply(this)">
+                      <span><strong>Apply Localtest</strong></span> 
+                    </button>
+                    {% else %}
+                    Done
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if resource.action and resource.version != data.current_client_version.real.ios %}
+                    <button id="{{ resource.name }}" name= "real" type="button" class="btn btn-primary" onclick="uploadCDN(this)">
+                      <span><strong>Upload CDN REAL</strong></span>
+                    </button>
+                    {% else %}
+                    Done
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if resource.action and resource.version != data.current_client_version.real.ios %}
+                    <button id="{{ resource.name }}" name= "real" type="button" class="btn btn-warning" onclick="resourceApply(this)">
+                      <span><strong>Apply REAL</strong></span> 
+                    </button>
+                    {% else %}
+                    Done
+                    {% endif %}
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td>{{ resource.name }}</td>
+                  <td>{{ resource.size }}</td>
+                  <td>{{ resource.version }}</td>
+                  <td>{{ resource.flatform }}</td>
+                  <td>
+                    {% if resource.action %}
+                    <button id="{{ resource.name }}" name= "test" type="button" class="btn btn-primary" onclick="uploadCDN(this)">
+                      <span><strong>Upload CDN Localtest</strong></span>
+                    </button>
+                    {% else %}
+                    Done
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if resource.action %}
+                    <button id="{{ resource.name }}" name= "test" type="button" class="btn btn-primary" onclick="resourceApply(this)">
+                      <span><strong>Apply Localtest</strong></span> 
+                    </button>
+                    {% else %}
+                    Done
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if resource.action and resource.version != data.current_client_version.real.android %}
+                    <button id="{{ resource.name }}" name= "real" type="button" class="btn btn-primary" onclick="uploadCDN(this)">
+                      <span><strong>Upload CDN REAL</strong></span>
+                    </button>
+                    {% else %}
+                    Done
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if resource.action and resource.version != data.current_client_version.real.android %}
+                    <button id="{{ resource.name }}" name= "real" type="button" class="btn btn-warning" onclick="resourceApply(this)">
+                      <span><strong>Apply REAL</strong></span> 
+                    </button>
+                    {% else %}
+                    Done
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endif %}
+              {% endfor %}      
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> <!-- end row  -->
+
+<script type="text/javascript">
+
+</script>
