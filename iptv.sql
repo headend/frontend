@@ -30,11 +30,11 @@ CREATE TABLE `agent` (
   `ram` smallint(6) DEFAULT NULL,
   `disk` smallint(6) DEFAULT NULL,
   `location` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_monitor` int(11) DEFAULT NULL,
-  `is_alarm` int(11) DEFAULT NULL,
-  `signal_monitor` int(11) DEFAULT NULL,
-  `video_monitor` int(11) DEFAULT NULL,
-  `audio_monitor` int(11) DEFAULT NULL,
+  `is_monitor` tinyint(1) NOT NULL,
+  `is_alarm` tinyint(1) NOT NULL,
+  `signal_monitor` tinyint(1) NOT NULL,
+  `video_monitor` tinyint(1) NOT NULL,
+  `audio_monitor` tinyint(1) NOT NULL,
   `run_thread` int(11) DEFAULT NULL,
   `date_create` datetime(6) DEFAULT NULL,
   `date_update` datetime(6) DEFAULT NULL,
@@ -184,7 +184,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add agent',7,'add_agent'),(26,'Can change agent',7,'change_agent'),(27,'Can delete agent',7,'delete_agent'),(28,'Can view agent',7,'view_agent'),(29,'Can add channel',8,'add_channel'),(30,'Can change channel',8,'change_channel'),(31,'Can delete channel',8,'delete_channel'),(32,'Can view channel',8,'view_channel'),(33,'Can add encoder',9,'add_encoder'),(34,'Can change encoder',9,'change_encoder'),(35,'Can delete encoder',9,'delete_encoder'),(36,'Can view encoder',9,'view_encoder'),(37,'Can add enviroment',10,'add_enviroment'),(38,'Can change enviroment',10,'change_enviroment'),(39,'Can delete enviroment',10,'delete_enviroment'),(40,'Can view enviroment',10,'view_enviroment'),(41,'Can add group channel',11,'add_groupchannel'),(42,'Can change group channel',11,'change_groupchannel'),(43,'Can delete group channel',11,'delete_groupchannel'),(44,'Can view group channel',11,'view_groupchannel'),(45,'Can add group profile',12,'add_groupprofile'),(46,'Can change group profile',12,'change_groupprofile'),(47,'Can delete group profile',12,'delete_groupprofile'),(48,'Can view group profile',12,'view_groupprofile'),(49,'Can add multicast ip',13,'add_multicastip'),(50,'Can change multicast ip',13,'change_multicastip'),(51,'Can delete multicast ip',13,'delete_multicastip'),(52,'Can view multicast ip',13,'view_multicastip'),(53,'Can add profile quality',14,'add_profilequality'),(54,'Can change profile quality',14,'change_profilequality'),(55,'Can delete profile quality',14,'delete_profilequality'),(56,'Can view profile quality',14,'view_profilequality'),(57,'Can add satellite dishe',15,'add_satellitedishe'),(58,'Can change satellite dishe',15,'change_satellitedishe'),(59,'Can delete satellite dishe',15,'delete_satellitedishe'),(60,'Can view satellite dishe',15,'view_satellitedishe'),(61,'Can add vlan provider',16,'add_vlanprovider'),(62,'Can change vlan provider',16,'change_vlanprovider'),(63,'Can delete vlan provider',16,'delete_vlanprovider'),(64,'Can view vlan provider',16,'view_vlanprovider'),(65,'Can add vlan',17,'add_vlan'),(66,'Can change vlan',17,'change_vlan'),(67,'Can delete vlan',17,'delete_vlan'),(68,'Can view vlan',17,'view_vlan'),(69,'Can add profile',18,'add_profile'),(70,'Can change profile',18,'change_profile'),(71,'Can delete profile',18,'delete_profile'),(72,'Can view profile',18,'view_profile'),(73,'Can add user has multicast ip',19,'add_userhasmulticastip'),(74,'Can change user has multicast ip',19,'change_userhasmulticastip'),(75,'Can delete user has multicast ip',19,'delete_userhasmulticastip'),(76,'Can view user has multicast ip',19,'view_userhasmulticastip'),(77,'Can add satellite dishe has multicast ip',20,'add_satellitedishehasmulticastip'),(78,'Can change satellite dishe has multicast ip',20,'change_satellitedishehasmulticastip'),(79,'Can delete satellite dishe has multicast ip',20,'delete_satellitedishehasmulticastip'),(80,'Can view satellite dishe has multicast ip',20,'view_satellitedishehasmulticastip'),(81,'Can add monitor',21,'add_monitor'),(82,'Can change monitor',21,'change_monitor'),(83,'Can delete monitor',21,'delete_monitor'),(84,'Can view monitor',21,'view_monitor'),(85,'Can add group profile has profile',22,'add_groupprofilehasprofile'),(86,'Can change group profile has profile',22,'change_groupprofilehasprofile'),(87,'Can delete group profile has profile',22,'delete_groupprofilehasprofile'),(88,'Can view group profile has profile',22,'view_groupprofilehasprofile'),(89,'Can add group channel has channel',23,'add_groupchannelhaschannel'),(90,'Can change group channel has channel',23,'change_groupchannelhaschannel'),(91,'Can delete group channel has channel',23,'delete_groupchannelhaschannel'),(92,'Can view group channel has channel',23,'view_groupchannelhaschannel'),(93,'Can add encoder input profile',24,'add_encoderinputprofile'),(94,'Can change encoder input profile',24,'change_encoderinputprofile'),(95,'Can delete encoder input profile',24,'delete_encoderinputprofile'),(96,'Can view encoder input profile',24,'view_encoderinputprofile'),(97,'Can add encoder has vlan',25,'add_encoderhasvlan'),(98,'Can change encoder has vlan',25,'change_encoderhasvlan'),(99,'Can delete encoder has vlan',25,'delete_encoderhasvlan'),(100,'Can view encoder has vlan',25,'view_encoderhasvlan'),(101,'Can add agent has vlan',26,'add_agenthasvlan'),(102,'Can change agent has vlan',26,'change_agenthasvlan'),(103,'Can delete agent has vlan',26,'delete_agenthasvlan'),(104,'Can view agent has vlan',26,'view_agenthasvlan'),(105,'Can add agent has group profile',27,'add_agenthasgroupprofile'),(106,'Can change agent has group profile',27,'change_agenthasgroupprofile'),(107,'Can delete agent has group profile',27,'delete_agenthasgroupprofile'),(108,'Can view agent has group profile',27,'view_agenthasgroupprofile');
+INSERT INTO `auth_permission` VALUES (1,'Can add permission',1,'add_permission'),(2,'Can change permission',1,'change_permission'),(3,'Can delete permission',1,'delete_permission'),(4,'Can view permission',1,'view_permission'),(5,'Can add group',2,'add_group'),(6,'Can change group',2,'change_group'),(7,'Can delete group',2,'delete_group'),(8,'Can view group',2,'view_group'),(9,'Can add user',3,'add_user'),(10,'Can change user',3,'change_user'),(11,'Can delete user',3,'delete_user'),(12,'Can view user',3,'view_user'),(13,'Can add content type',4,'add_contenttype'),(14,'Can change content type',4,'change_contenttype'),(15,'Can delete content type',4,'delete_contenttype'),(16,'Can view content type',4,'view_contenttype'),(17,'Can add channel',5,'add_channel'),(18,'Can change channel',5,'change_channel'),(19,'Can delete channel',5,'delete_channel'),(20,'Can view channel',5,'view_channel'),(21,'Can add group channel',6,'add_groupchannel'),(22,'Can change group channel',6,'change_groupchannel'),(23,'Can delete group channel',6,'delete_groupchannel'),(24,'Can view group channel',6,'view_groupchannel'),(25,'Can add group channel has channel',7,'add_groupchannelhaschannel'),(26,'Can change group channel has channel',7,'change_groupchannelhaschannel'),(27,'Can delete group channel has channel',7,'delete_groupchannelhaschannel'),(28,'Can view group channel has channel',7,'view_groupchannelhaschannel'),(29,'Can add iptv enviroment',8,'add_iptvenviroment'),(30,'Can change iptv enviroment',8,'change_iptvenviroment'),(31,'Can delete iptv enviroment',8,'delete_iptvenviroment'),(32,'Can view iptv enviroment',8,'view_iptvenviroment'),(33,'Can add multicast ip',9,'add_multicastip'),(34,'Can change multicast ip',9,'change_multicastip'),(35,'Can delete multicast ip',9,'delete_multicastip'),(36,'Can view multicast ip',9,'view_multicastip'),(37,'Can add vlan provider',10,'add_vlanprovider'),(38,'Can change vlan provider',10,'change_vlanprovider'),(39,'Can delete vlan provider',10,'delete_vlanprovider'),(40,'Can view vlan provider',10,'view_vlanprovider'),(41,'Can add vlan',11,'add_vlan'),(42,'Can change vlan',11,'change_vlan'),(43,'Can delete vlan',11,'delete_vlan'),(44,'Can view vlan',11,'view_vlan'),(45,'Can add user has multicast ip',12,'add_userhasmulticastip'),(46,'Can change user has multicast ip',12,'change_userhasmulticastip'),(47,'Can delete user has multicast ip',12,'delete_userhasmulticastip'),(48,'Can view user has multicast ip',12,'view_userhasmulticastip'),(49,'Can add satellite dishe',13,'add_satellitedishe'),(50,'Can change satellite dishe',13,'change_satellitedishe'),(51,'Can delete satellite dishe',13,'delete_satellitedishe'),(52,'Can view satellite dishe',13,'view_satellitedishe'),(53,'Can add satellite dishe has multicast ip',14,'add_satellitedishehasmulticastip'),(54,'Can change satellite dishe has multicast ip',14,'change_satellitedishehasmulticastip'),(55,'Can delete satellite dishe has multicast ip',14,'delete_satellitedishehasmulticastip'),(56,'Can view satellite dishe has multicast ip',14,'view_satellitedishehasmulticastip'),(57,'Can add encoder',15,'add_encoder'),(58,'Can change encoder',15,'change_encoder'),(59,'Can delete encoder',15,'delete_encoder'),(60,'Can view encoder',15,'view_encoder'),(61,'Can add encoder has vlan',16,'add_encoderhasvlan'),(62,'Can change encoder has vlan',16,'change_encoderhasvlan'),(63,'Can delete encoder has vlan',16,'delete_encoderhasvlan'),(64,'Can view encoder has vlan',16,'view_encoderhasvlan'),(65,'Can add agent',17,'add_agent'),(66,'Can change agent',17,'change_agent'),(67,'Can delete agent',17,'delete_agent'),(68,'Can view agent',17,'view_agent'),(69,'Can add agent has vlan',18,'add_agenthasvlan'),(70,'Can change agent has vlan',18,'change_agenthasvlan'),(71,'Can delete agent has vlan',18,'delete_agenthasvlan'),(72,'Can view agent has vlan',18,'view_agenthasvlan'),(73,'Can add monitor',19,'add_monitor'),(74,'Can change monitor',19,'change_monitor'),(75,'Can delete monitor',19,'delete_monitor'),(76,'Can view monitor',19,'view_monitor'),(77,'Can add group profile',20,'add_groupprofile'),(78,'Can change group profile',20,'change_groupprofile'),(79,'Can delete group profile',20,'delete_groupprofile'),(80,'Can view group profile',20,'view_groupprofile'),(81,'Can add profile quality',21,'add_profilequality'),(82,'Can change profile quality',21,'change_profilequality'),(83,'Can delete profile quality',21,'delete_profilequality'),(84,'Can view profile quality',21,'view_profilequality'),(85,'Can add profile',22,'add_profile'),(86,'Can change profile',22,'change_profile'),(87,'Can delete profile',22,'delete_profile'),(88,'Can view profile',22,'view_profile'),(89,'Can add agent has group profile',23,'add_agenthasgroupprofile'),(90,'Can change agent has group profile',23,'change_agenthasgroupprofile'),(91,'Can delete agent has group profile',23,'delete_agenthasgroupprofile'),(92,'Can view agent has group profile',23,'view_agenthasgroupprofile'),(93,'Can add group profile has profile',24,'add_groupprofilehasprofile'),(94,'Can change group profile has profile',24,'change_groupprofilehasprofile'),(95,'Can delete group profile has profile',24,'delete_groupprofilehasprofile'),(96,'Can view group profile has profile',24,'view_groupprofilehasprofile'),(97,'Can add encoder input profile',25,'add_encoderinputprofile'),(98,'Can change encoder input profile',25,'change_encoderinputprofile'),(99,'Can delete encoder input profile',25,'delete_encoderinputprofile'),(100,'Can view encoder input profile',25,'view_encoderinputprofile'),(101,'Can add log entry',26,'add_logentry'),(102,'Can change log entry',26,'change_logentry'),(103,'Can delete log entry',26,'delete_logentry'),(104,'Can view log entry',26,'view_logentry'),(105,'Can add session',27,'add_session'),(106,'Can change session',27,'change_session'),(107,'Can delete session',27,'delete_session'),(108,'Can view session',27,'view_session');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +218,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$150000$qn6uoXsIohsB$+Jd36mW46llhlJKZUEQ/4h7lgWSG+zqTqOtOg7XfCIs=',NULL,1,'admin','','','admin@gmail.com',1,1,'2020-12-13 10:00:52.547111');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$150000$RjPoPy2kxymd$0PVcJ+jiw/V3X1cj4fB0KlWL7UqX24bA/0bmEfPqn6I=','2020-12-13 12:10:02.745321',1,'admin','','','admin@gmail.com',1,1,'2020-12-13 12:09:22.902406');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,7 +359,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(7,'agent','agent'),(27,'agent','agenthasgroupprofile'),(26,'agent','agenthasvlan'),(8,'agent','channel'),(9,'agent','encoder'),(25,'agent','encoderhasvlan'),(24,'agent','encoderinputprofile'),(10,'agent','enviroment'),(11,'agent','groupchannel'),(23,'agent','groupchannelhaschannel'),(12,'agent','groupprofile'),(22,'agent','groupprofilehasprofile'),(21,'agent','monitor'),(13,'agent','multicastip'),(18,'agent','profile'),(14,'agent','profilequality'),(15,'agent','satellitedishe'),(20,'agent','satellitedishehasmulticastip'),(19,'agent','userhasmulticastip'),(17,'agent','vlan'),(16,'agent','vlanprovider'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(6,'sessions','session');
+INSERT INTO `django_content_type` VALUES (26,'admin','logentry'),(17,'agent','agent'),(18,'agent','agenthasvlan'),(2,'auth','group'),(1,'auth','permission'),(3,'auth','user'),(5,'channel','channel'),(6,'channel','groupchannel'),(7,'channel','groupchannelhaschannel'),(4,'contenttypes','contenttype'),(15,'device','encoder'),(16,'device','encoderhasvlan'),(13,'device','satellitedishe'),(14,'device','satellitedishehasmulticastip'),(23,'iptvprofile','agenthasgroupprofile'),(25,'iptvprofile','encoderinputprofile'),(20,'iptvprofile','groupprofile'),(24,'iptvprofile','groupprofilehasprofile'),(19,'iptvprofile','monitor'),(22,'iptvprofile','profile'),(21,'iptvprofile','profilequality'),(8,'iptvresource','iptvenviroment'),(9,'iptvresource','multicastip'),(12,'iptvresource','userhasmulticastip'),(11,'iptvresource','vlan'),(10,'iptvresource','vlanprovider'),(27,'sessions','session');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,7 +376,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +385,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2020-12-13 09:59:04.026748'),(2,'auth','0001_initial','2020-12-13 09:59:04.356181'),(3,'admin','0001_initial','2020-12-13 09:59:05.248290'),(4,'admin','0002_logentry_remove_auto_add','2020-12-13 09:59:05.470419'),(5,'admin','0003_logentry_add_action_flag_choices','2020-12-13 09:59:05.487314'),(6,'agent','0001_initial','2020-12-13 09:59:06.971019'),(7,'agent','0002_auto_20201213_0950','2020-12-13 09:59:14.819166'),(8,'contenttypes','0002_remove_content_type_name','2020-12-13 09:59:15.006436'),(9,'auth','0002_alter_permission_name_max_length','2020-12-13 09:59:15.103700'),(10,'auth','0003_alter_user_email_max_length','2020-12-13 09:59:15.212814'),(11,'auth','0004_alter_user_username_opts','2020-12-13 09:59:15.244638'),(12,'auth','0005_alter_user_last_login_null','2020-12-13 09:59:15.327977'),(13,'auth','0006_require_contenttypes_0002','2020-12-13 09:59:15.334417'),(14,'auth','0007_alter_validators_add_error_messages','2020-12-13 09:59:15.352139'),(15,'auth','0008_alter_user_username_max_length','2020-12-13 09:59:15.471851'),(16,'auth','0009_alter_user_last_name_max_length','2020-12-13 09:59:15.591567'),(17,'auth','0010_alter_group_name_max_length','2020-12-13 09:59:15.707606'),(18,'auth','0011_update_proxy_permissions','2020-12-13 09:59:15.768443'),(19,'sessions','0001_initial','2020-12-13 09:59:15.823204');
+INSERT INTO `django_migrations` VALUES (1,'channel','0001_initial','2020-12-13 12:07:41.218103'),(2,'contenttypes','0001_initial','2020-12-13 12:07:41.971608'),(3,'auth','0001_initial','2020-12-13 12:07:42.293432'),(4,'iptvresource','0001_initial','2020-12-13 12:07:43.526036'),(5,'device','0001_initial','2020-12-13 12:07:45.003322'),(6,'agent','0001_initial','2020-12-13 12:07:46.500078'),(7,'iptvprofile','0001_initial','2020-12-13 12:07:49.697079'),(8,'admin','0001_initial','2020-12-13 12:08:55.487544'),(9,'admin','0002_logentry_remove_auto_add','2020-12-13 12:08:55.700887'),(10,'admin','0003_logentry_add_action_flag_choices','2020-12-13 12:08:55.723504'),(11,'contenttypes','0002_remove_content_type_name','2020-12-13 12:08:56.003940'),(12,'auth','0002_alter_permission_name_max_length','2020-12-13 12:08:56.154087'),(13,'auth','0003_alter_user_email_max_length','2020-12-13 12:08:56.307049'),(14,'auth','0004_alter_user_username_opts','2020-12-13 12:08:56.378473'),(15,'auth','0005_alter_user_last_login_null','2020-12-13 12:08:56.507554'),(16,'auth','0006_require_contenttypes_0002','2020-12-13 12:08:56.522683'),(17,'auth','0007_alter_validators_add_error_messages','2020-12-13 12:08:56.561888'),(18,'auth','0008_alter_user_username_max_length','2020-12-13 12:08:56.687251'),(19,'auth','0009_alter_user_last_name_max_length','2020-12-13 12:08:56.800295'),(20,'auth','0010_alter_group_name_max_length','2020-12-13 12:08:56.940159'),(21,'auth','0011_update_proxy_permissions','2020-12-13 12:08:57.001268'),(22,'sessions','0001_initial','2020-12-13 12:08:57.049743');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,6 +411,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('fij6bxwr1x1eeb0j2qnazm22r47tiypt','N2I4M2RlMTY3YTNkMDhkMjM2YTUzMmFlMDRjMzAzN2M4ZjIwMTgxZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxNjc1MzdkYWE3MDc4YWU4YzQ1OGE1YmFhNjlhYzNjMDE0ZDhiNWU2In0=','2020-12-27 12:10:02.755007');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -650,7 +651,7 @@ CREATE TABLE `monitor` (
   `signal_monitor` int(11) DEFAULT NULL,
   `video_monitor` int(11) DEFAULT NULL,
   `audio_monitor` int(11) DEFAULT NULL,
-  `is_enable` int(11) DEFAULT NULL,
+  `is_enable` tinyint(1) NOT NULL,
   `date_update` datetime(6) DEFAULT NULL,
   `agent_id` int(11) NOT NULL,
   `profile_id` int(11) NOT NULL,
@@ -708,7 +709,7 @@ CREATE TABLE `profile` (
   `desc` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date_create` datetime(6) DEFAULT NULL,
   `date_update` datetime(6) DEFAULT NULL,
-  `is_original` int(11) NOT NULL,
+  `is_original` tinyint(1) NOT NULL,
   `channel_id` int(11) NOT NULL,
   `encoder_id` int(11) NOT NULL,
   `multicast_ip_id` int(11) NOT NULL,
@@ -774,7 +775,7 @@ CREATE TABLE `satellite_dishe` (
   `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `diameter` decimal(5,2) DEFAULT NULL,
   `location` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
   `date_create` datetime(6) DEFAULT NULL,
   `date_update` datetime(6) DEFAULT NULL,
   `env_id` int(11) NOT NULL,
@@ -862,7 +863,7 @@ CREATE TABLE `vlan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vlanid` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `desc` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
   `date_create` datetime(6) DEFAULT NULL,
   `date_update` datetime(6) DEFAULT NULL,
   `env_id` int(11) NOT NULL,
@@ -919,4 +920,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-13 17:02:00
+-- Dump completed on 2020-12-13 19:20:50
