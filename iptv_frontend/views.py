@@ -7,7 +7,7 @@ from datetime import timedelta
 
 
 def index(request):
-    template = loader.get_template('servers/index.html')
+    template = loader.get_template('agents/index.html')
     data = None
     rc= None
     msg = ""
