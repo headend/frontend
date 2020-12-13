@@ -55,7 +55,7 @@ class Vlan(models.Model):
     id = models.AutoField(primary_key=True)
     vlanid = models.CharField(max_length=30)
     desc = models.CharField(max_length=60, blank=True, null=True)
-    status = models.BooleanField() 
+    is_enable = models.BooleanField() 
     date_create = models.DateTimeField(blank=True, null=True)
     date_update = models.DateTimeField(blank=True, null=True)
     env = models.ForeignKey(IptvEnviroment, models.CASCADE)

@@ -40,7 +40,7 @@ CREATE TABLE `agent` (
   `date_update` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ip_control` (`ip_control`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,6 +49,7 @@ CREATE TABLE `agent` (
 
 LOCK TABLES `agent` WRITE;
 /*!40000 ALTER TABLE `agent` DISABLE KEYS */;
+INSERT INTO `agent` VALUES (1,'10.0.1.11',NULL,NULL,NULL,NULL,NULL,1,1,1,1,1,5,NULL,NULL);
 /*!40000 ALTER TABLE `agent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,7 +293,7 @@ CREATE TABLE `channel` (
   `date_create` datetime(6) DEFAULT NULL,
   `date_update` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,6 +302,7 @@ CREATE TABLE `channel` (
 
 LOCK TABLES `channel` WRITE;
 /*!40000 ALTER TABLE `channel` DISABLE KEYS */;
+INSERT INTO `channel` VALUES (1,'Test channel',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `channel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +327,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,6 +336,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (1,'2020-12-13 12:31:13.307855','1','Channel object (1)',1,'[{\"added\": {}}]',5,1),(2,'2020-12-13 12:31:57.388514','1','ProfileQuality object (1)',1,'[{\"added\": {}}]',21,1),(3,'2020-12-13 12:32:23.932589','1','MulticastIp object (1)',1,'[{\"added\": {}}]',9,1),(4,'2020-12-13 12:33:02.266102','1','IptvEnviroment object (1)',1,'[{\"added\": {}}]',8,1),(5,'2020-12-13 12:33:06.613222','1','Encoder object (1)',1,'[{\"added\": {}}]',15,1),(6,'2020-12-13 12:33:37.073515','1','VlanProvider object (1)',1,'[{\"added\": {}}]',10,1),(7,'2020-12-13 12:33:42.210713','1','Vlan object (1)',1,'[{\"added\": {}}]',11,1),(8,'2020-12-13 12:33:46.235334','1','Profile object (1)',1,'[{\"added\": {}}]',22,1),(9,'2020-12-13 12:34:13.408603','1','Agent object (1)',1,'[{\"added\": {}}]',17,1),(10,'2020-12-13 12:34:45.201917','1','Monitor object (1)',1,'[{\"added\": {}}]',19,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,7 +379,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +388,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'channel','0001_initial','2020-12-13 12:07:41.218103'),(2,'contenttypes','0001_initial','2020-12-13 12:07:41.971608'),(3,'auth','0001_initial','2020-12-13 12:07:42.293432'),(4,'iptvresource','0001_initial','2020-12-13 12:07:43.526036'),(5,'device','0001_initial','2020-12-13 12:07:45.003322'),(6,'agent','0001_initial','2020-12-13 12:07:46.500078'),(7,'iptvprofile','0001_initial','2020-12-13 12:07:49.697079'),(8,'admin','0001_initial','2020-12-13 12:08:55.487544'),(9,'admin','0002_logentry_remove_auto_add','2020-12-13 12:08:55.700887'),(10,'admin','0003_logentry_add_action_flag_choices','2020-12-13 12:08:55.723504'),(11,'contenttypes','0002_remove_content_type_name','2020-12-13 12:08:56.003940'),(12,'auth','0002_alter_permission_name_max_length','2020-12-13 12:08:56.154087'),(13,'auth','0003_alter_user_email_max_length','2020-12-13 12:08:56.307049'),(14,'auth','0004_alter_user_username_opts','2020-12-13 12:08:56.378473'),(15,'auth','0005_alter_user_last_login_null','2020-12-13 12:08:56.507554'),(16,'auth','0006_require_contenttypes_0002','2020-12-13 12:08:56.522683'),(17,'auth','0007_alter_validators_add_error_messages','2020-12-13 12:08:56.561888'),(18,'auth','0008_alter_user_username_max_length','2020-12-13 12:08:56.687251'),(19,'auth','0009_alter_user_last_name_max_length','2020-12-13 12:08:56.800295'),(20,'auth','0010_alter_group_name_max_length','2020-12-13 12:08:56.940159'),(21,'auth','0011_update_proxy_permissions','2020-12-13 12:08:57.001268'),(22,'sessions','0001_initial','2020-12-13 12:08:57.049743');
+INSERT INTO `django_migrations` VALUES (1,'channel','0001_initial','2020-12-13 12:07:41.218103'),(2,'contenttypes','0001_initial','2020-12-13 12:07:41.971608'),(3,'auth','0001_initial','2020-12-13 12:07:42.293432'),(4,'iptvresource','0001_initial','2020-12-13 12:07:43.526036'),(5,'device','0001_initial','2020-12-13 12:07:45.003322'),(6,'agent','0001_initial','2020-12-13 12:07:46.500078'),(7,'iptvprofile','0001_initial','2020-12-13 12:07:49.697079'),(8,'admin','0001_initial','2020-12-13 12:08:55.487544'),(9,'admin','0002_logentry_remove_auto_add','2020-12-13 12:08:55.700887'),(10,'admin','0003_logentry_add_action_flag_choices','2020-12-13 12:08:55.723504'),(11,'contenttypes','0002_remove_content_type_name','2020-12-13 12:08:56.003940'),(12,'auth','0002_alter_permission_name_max_length','2020-12-13 12:08:56.154087'),(13,'auth','0003_alter_user_email_max_length','2020-12-13 12:08:56.307049'),(14,'auth','0004_alter_user_username_opts','2020-12-13 12:08:56.378473'),(15,'auth','0005_alter_user_last_login_null','2020-12-13 12:08:56.507554'),(16,'auth','0006_require_contenttypes_0002','2020-12-13 12:08:56.522683'),(17,'auth','0007_alter_validators_add_error_messages','2020-12-13 12:08:56.561888'),(18,'auth','0008_alter_user_username_max_length','2020-12-13 12:08:56.687251'),(19,'auth','0009_alter_user_last_name_max_length','2020-12-13 12:08:56.800295'),(20,'auth','0010_alter_group_name_max_length','2020-12-13 12:08:56.940159'),(21,'auth','0011_update_proxy_permissions','2020-12-13 12:08:57.001268'),(22,'sessions','0001_initial','2020-12-13 12:08:57.049743'),(23,'iptvresource','0002_auto_20201213_1239','2020-12-13 12:39:43.367542'),(24,'device','0002_auto_20201213_1239','2020-12-13 12:39:43.827227'),(25,'iptvprofile','0002_auto_20201213_1239','2020-12-13 12:39:47.360479');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,7 +440,7 @@ CREATE TABLE `encoder` (
   UNIQUE KEY `ip` (`ip`),
   KEY `encoder_enviroment_id_849333b1_fk_enviroment_id` (`enviroment_id`),
   CONSTRAINT `encoder_enviroment_id_849333b1_fk_enviroment_id` FOREIGN KEY (`enviroment_id`) REFERENCES `enviroment` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -446,6 +449,7 @@ CREATE TABLE `encoder` (
 
 LOCK TABLES `encoder` WRITE;
 /*!40000 ALTER TABLE `encoder` DISABLE KEYS */;
+INSERT INTO `encoder` VALUES (1,'Encode 1','10.0.0.1','HCM','HP',NULL,NULL,NULL,1);
 /*!40000 ALTER TABLE `encoder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -518,7 +522,7 @@ CREATE TABLE `enviroment` (
   `desc` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -527,6 +531,7 @@ CREATE TABLE `enviroment` (
 
 LOCK TABLES `enviroment` WRITE;
 /*!40000 ALTER TABLE `enviroment` DISABLE KEYS */;
+INSERT INTO `enviroment` VALUES (1,'Test',NULL);
 /*!40000 ALTER TABLE `enviroment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -645,12 +650,12 @@ DROP TABLE IF EXISTS `monitor`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `monitor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status_signal` int(11) DEFAULT NULL,
-  `status_video` int(11) DEFAULT NULL,
-  `status_audio` int(11) DEFAULT NULL,
-  `signal_monitor` int(11) DEFAULT NULL,
-  `video_monitor` int(11) DEFAULT NULL,
-  `audio_monitor` int(11) DEFAULT NULL,
+  `status_signal` tinyint(1) NOT NULL,
+  `status_video` tinyint(1) NOT NULL,
+  `status_audio` tinyint(1) NOT NULL,
+  `signal_monitor` tinyint(1) NOT NULL,
+  `video_monitor` tinyint(1) NOT NULL,
+  `audio_monitor` tinyint(1) NOT NULL,
   `is_enable` tinyint(1) NOT NULL,
   `date_update` datetime(6) DEFAULT NULL,
   `agent_id` int(11) NOT NULL,
@@ -660,7 +665,7 @@ CREATE TABLE `monitor` (
   KEY `monitor_agent_id_5a087e23_fk_agent_id` (`agent_id`),
   CONSTRAINT `monitor_agent_id_5a087e23_fk_agent_id` FOREIGN KEY (`agent_id`) REFERENCES `agent` (`id`),
   CONSTRAINT `monitor_profile_id_f82705a8_fk_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -669,6 +674,7 @@ CREATE TABLE `monitor` (
 
 LOCK TABLES `monitor` WRITE;
 /*!40000 ALTER TABLE `monitor` DISABLE KEYS */;
+INSERT INTO `monitor` VALUES (1,1,1,1,1,1,1,1,NULL,1,1);
 /*!40000 ALTER TABLE `monitor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -685,7 +691,7 @@ CREATE TABLE `multicast_ip` (
   `desc` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ip` (`ip`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -694,6 +700,7 @@ CREATE TABLE `multicast_ip` (
 
 LOCK TABLES `multicast_ip` WRITE;
 /*!40000 ALTER TABLE `multicast_ip` DISABLE KEYS */;
+INSERT INTO `multicast_ip` VALUES (1,'239.0.0.1','Test');
 /*!40000 ALTER TABLE `multicast_ip` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -726,7 +733,7 @@ CREATE TABLE `profile` (
   CONSTRAINT `profile_multicast_ip_id_ac289963_fk_multicast_ip_id` FOREIGN KEY (`multicast_ip_id`) REFERENCES `multicast_ip` (`id`),
   CONSTRAINT `profile_profile_quality_id_cc9c39bb_fk_profile_quality_id` FOREIGN KEY (`profile_quality_id`) REFERENCES `profile_quality` (`id`),
   CONSTRAINT `profile_vlan_id_61f62736_fk_vlan_id` FOREIGN KEY (`vlan_id`) REFERENCES `vlan` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -735,6 +742,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` VALUES (1,NULL,NULL,NULL,0,1,1,1,1,1);
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -751,7 +759,7 @@ CREATE TABLE `profile_quality` (
   `description` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `quality` (`quality`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -760,6 +768,7 @@ CREATE TABLE `profile_quality` (
 
 LOCK TABLES `profile_quality` WRITE;
 /*!40000 ALTER TABLE `profile_quality` DISABLE KEYS */;
+INSERT INTO `profile_quality` VALUES (1,'HD-4M','HD bitrate 4Mb');
 /*!40000 ALTER TABLE `profile_quality` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -775,7 +784,7 @@ CREATE TABLE `satellite_dishe` (
   `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `diameter` decimal(5,2) DEFAULT NULL,
   `location` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL,
+  `is_enable` tinyint(1) NOT NULL,
   `date_create` datetime(6) DEFAULT NULL,
   `date_update` datetime(6) DEFAULT NULL,
   `env_id` int(11) NOT NULL,
@@ -863,7 +872,7 @@ CREATE TABLE `vlan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vlanid` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `desc` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL,
+  `is_enable` tinyint(1) NOT NULL,
   `date_create` datetime(6) DEFAULT NULL,
   `date_update` datetime(6) DEFAULT NULL,
   `env_id` int(11) NOT NULL,
@@ -873,7 +882,7 @@ CREATE TABLE `vlan` (
   KEY `vlan_env_id_5aee5537_fk_enviroment_id` (`env_id`),
   CONSTRAINT `vlan_env_id_5aee5537_fk_enviroment_id` FOREIGN KEY (`env_id`) REFERENCES `enviroment` (`id`),
   CONSTRAINT `vlan_vlan_provider_id_09b095b8_fk_vlan_provider_id` FOREIGN KEY (`vlan_provider_id`) REFERENCES `vlan_provider` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -882,6 +891,7 @@ CREATE TABLE `vlan` (
 
 LOCK TABLES `vlan` WRITE;
 /*!40000 ALTER TABLE `vlan` DISABLE KEYS */;
+INSERT INTO `vlan` VALUES (1,'10',NULL,1,NULL,NULL,1,1);
 /*!40000 ALTER TABLE `vlan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -899,7 +909,7 @@ CREATE TABLE `vlan_provider` (
   `desc` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -908,6 +918,7 @@ CREATE TABLE `vlan_provider` (
 
 LOCK TABLES `vlan_provider` WRITE;
 /*!40000 ALTER TABLE `vlan_provider` DISABLE KEYS */;
+INSERT INTO `vlan_provider` VALUES (1,'Internal','HCM',NULL);
 /*!40000 ALTER TABLE `vlan_provider` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -920,4 +931,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-13 19:20:50
+-- Dump completed on 2020-12-13 19:40:16

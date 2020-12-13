@@ -41,7 +41,7 @@ class SatelliteDishe(models.Model):
     name = models.CharField(unique=True, max_length=45)
     diameter = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     location = models.CharField(max_length=60, blank=True, null=True)
-    status = models.BooleanField() 
+    is_enable = models.BooleanField() 
     date_create = models.DateTimeField(blank=True, null=True)
     date_update = models.DateTimeField(blank=True, null=True)
     env = models.ForeignKey(IptvEnviroment, models.CASCADE)

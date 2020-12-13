@@ -76,12 +76,12 @@ class EncoderInputProfile(models.Model):
 
 class Monitor(models.Model):
     id = models.AutoField(primary_key=True)
-    status_signal = models.IntegerField(blank=True, null=True)
-    status_video = models.IntegerField(blank=True, null=True)
-    status_audio = models.IntegerField(blank=True, null=True)
-    signal_monitor = models.IntegerField(blank=True, null=True)
-    video_monitor = models.IntegerField(blank=True, null=True)
-    audio_monitor = models.IntegerField(blank=True, null=True)
+    status_signal = models.BooleanField() 
+    status_video = models.BooleanField() 
+    status_audio = models.BooleanField() 
+    signal_monitor = models.BooleanField() 
+    video_monitor = models.BooleanField() 
+    audio_monitor = models.BooleanField() 
     is_enable = models.BooleanField() 
     date_update = models.DateTimeField(blank=True, null=True)
     agent = models.ForeignKey(Agent, models.CASCADE)
