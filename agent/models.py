@@ -10,6 +10,7 @@ from  django.contrib.auth.models import User as AuthUser
 
 
 class Agent(models.Model):
+    id = models.AutoField(primary_key=True)
     ip_control = models.CharField(unique=True, max_length=15)
     ip_receive_multicast = models.CharField(max_length=15, blank=True, null=True)
     cpu = models.SmallIntegerField(blank=True, null=True)
@@ -31,8 +32,9 @@ class Agent(models.Model):
 
 
 class AgentHasGroupProfile(models.Model):
-    agent = models.ForeignKey(Agent, models.DO_NOTHING)
-    group_profile = models.ForeignKey('GroupProfile', models.DO_NOTHING)
+    id = models.AutoField(primary_key=True)
+    agent = models.ForeignKey(Agent, models.CASCADE)
+    group_profile = models.ForeignKey('GroupProfile', models.CASCADE)
 
     class Meta:
         managed = True
@@ -41,8 +43,9 @@ class AgentHasGroupProfile(models.Model):
 
 
 class AgentHasVlan(models.Model):
-    agent = models.ForeignKey(Agent, models.DO_NOTHING)
-    vlan = models.ForeignKey('Vlan', models.DO_NOTHING)
+    id = models.AutoField(primary_key=True)
+    agent = models.ForeignKey(Agent, models.CASCADE)
+    vlan = models.ForeignKey('Vlan', models.CASCADE)
 
     class Meta:
         managed = True
@@ -51,6 +54,7 @@ class AgentHasVlan(models.Model):
 
 
 class Channel(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30, blank=True, null=True)
     desc = models.CharField(max_length=60, blank=True, null=True)
     date_create = models.DateTimeField(blank=True, null=True)
@@ -62,6 +66,7 @@ class Channel(models.Model):
 
 
 class Encoder(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(unique=True, max_length=45)
     ip = models.CharField(unique=True, max_length=45, blank=True, null=True)
     location = models.CharField(max_length=60, blank=True, null=True)
@@ -69,7 +74,7 @@ class Encoder(models.Model):
     desc = models.CharField(max_length=45, blank=True, null=True)
     date_create = models.DateTimeField(blank=True, null=True)
     date_update = models.DateTimeField(blank=True, null=True)
-    enviroment = models.ForeignKey('Enviroment', models.DO_NOTHING)
+    enviroment = models.ForeignKey('Enviroment', models.CASCADE)
 
     class Meta:
         managed = True
@@ -77,9 +82,9 @@ class Encoder(models.Model):
 
 
 class EncoderHasVlan(models.Model):
-    id = models.IntegerField(primary_key=True)
-    vlan = models.ForeignKey('Vlan', models.DO_NOTHING)
-    encoder = models.ForeignKey(Encoder, models.DO_NOTHING)
+    id = models.AutoField(primary_key=True)
+    vlan = models.ForeignKey('Vlan', models.CASCADE)
+    encoder = models.ForeignKey(Encoder, models.CASCADE)
 
     class Meta:
         managed = True
@@ -88,9 +93,9 @@ class EncoderHasVlan(models.Model):
 
 
 class EncoderInputProfile(models.Model):
-    id = models.CharField(primary_key=True, max_length=45)
-    profile = models.ForeignKey('Profile', models.DO_NOTHING)
-    encoder = models.ForeignKey(Encoder, models.DO_NOTHING)
+    id = models.AutoField(primary_key=True)
+    profile = models.ForeignKey('Profile', models.CASCADE)
+    encoder = models.ForeignKey(Encoder, models.CASCADE)
 
     class Meta:
         managed = True
@@ -117,8 +122,8 @@ class GroupChannel(models.Model):
 
 
 class GroupChannelHasChannel(models.Model):
-    group_channel = models.ForeignKey(GroupChannel, models.DO_NOTHING)
-    channel = models.ForeignKey(Channel, models.DO_NOTHING)
+    group_channel = models.ForeignKey(GroupChannel, models.CASCADE)
+    channel = models.ForeignKey(Channel, models.CASCADE)
 
     class Meta:
         managed = True
@@ -136,8 +141,8 @@ class GroupProfile(models.Model):
 
 
 class GroupProfileHasProfile(models.Model):
-    group_profile = models.ForeignKey(GroupProfile, models.DO_NOTHING)
-    profile = models.ForeignKey('Profile', models.DO_NOTHING)
+    group_profile = models.ForeignKey(GroupProfile, models.CASCADE)
+    profile = models.ForeignKey('Profile', models.CASCADE)
 
     class Meta:
         managed = True
@@ -154,8 +159,8 @@ class Monitor(models.Model):
     audio_monitor = models.IntegerField(blank=True, null=True)
     is_enable = models.IntegerField(blank=True, null=True)
     date_update = models.DateTimeField(blank=True, null=True)
-    agent = models.ForeignKey(Agent, models.DO_NOTHING)
-    profile = models.ForeignKey('Profile', models.DO_NOTHING)
+    agent = models.ForeignKey(Agent, models.CASCADE)
+    profile = models.ForeignKey('Profile', models.CASCADE)
 
     class Meta:
         managed = True
@@ -164,7 +169,7 @@ class Monitor(models.Model):
 
 
 class MulticastIp(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     ip = models.CharField(unique=True, max_length=15, blank=True, null=True)
     desc = models.CharField(max_length=60, blank=True, null=True)
 
@@ -174,16 +179,16 @@ class MulticastIp(models.Model):
 
 
 class Profile(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     desc = models.CharField(max_length=60, blank=True, null=True)
     date_create = models.DateTimeField(blank=True, null=True)
     date_update = models.DateTimeField(blank=True, null=True)
-    profile_quality = models.ForeignKey('ProfileQuality', models.DO_NOTHING)
-    channel = models.ForeignKey(Channel, models.DO_NOTHING)
-    multicast_ip = models.ForeignKey(MulticastIp, models.DO_NOTHING)
-    vlan = models.ForeignKey('Vlan', models.DO_NOTHING)
+    profile_quality = models.ForeignKey('ProfileQuality', models.CASCADE)
+    channel = models.ForeignKey(Channel, models.CASCADE)
+    multicast_ip = models.ForeignKey(MulticastIp, models.CASCADE)
+    vlan = models.ForeignKey('Vlan', models.CASCADE)
     is_original = models.IntegerField()
-    encoder = models.ForeignKey(Encoder, models.DO_NOTHING)
+    encoder = models.ForeignKey(Encoder, models.CASCADE)
 
     class Meta:
         managed = True
@@ -192,7 +197,7 @@ class Profile(models.Model):
 
 
 class ProfileQuality(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     quality = models.CharField(unique=True, max_length=45)
     description = models.CharField(max_length=60, blank=True, null=True)
 
@@ -208,7 +213,7 @@ class SatelliteDishe(models.Model):
     status = models.IntegerField(blank=True, null=True)
     date_create = models.DateTimeField(blank=True, null=True)
     date_update = models.DateTimeField(blank=True, null=True)
-    env = models.ForeignKey(Enviroment, models.DO_NOTHING)
+    env = models.ForeignKey(Enviroment, models.CASCADE)
 
     class Meta:
         managed = True
@@ -217,8 +222,8 @@ class SatelliteDishe(models.Model):
 
 
 class SatelliteDisheHasMulticastIp(models.Model):
-    satellite_dishe = models.ForeignKey(SatelliteDishe, models.DO_NOTHING)
-    multicast_ip = models.ForeignKey(MulticastIp, models.DO_NOTHING)
+    satellite_dishe = models.ForeignKey(SatelliteDishe, models.CASCADE)
+    multicast_ip = models.ForeignKey(MulticastIp, models.CASCADE)
 
     class Meta:
         managed = True
@@ -228,9 +233,9 @@ class SatelliteDisheHasMulticastIp(models.Model):
 
 
 class UserHasMulticastIp(models.Model):
-    id = models.CharField(primary_key=True, max_length=45)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    multicast_ip = models.ForeignKey(MulticastIp, models.DO_NOTHING)
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(AuthUser, models.CASCADE)
+    multicast_ip = models.ForeignKey(MulticastIp, models.CASCADE)
 
     class Meta:
         managed = True
@@ -239,14 +244,14 @@ class UserHasMulticastIp(models.Model):
 
 
 class Vlan(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     vlanid = models.CharField(max_length=30)
     desc = models.CharField(max_length=60, blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
     date_create = models.DateTimeField(blank=True, null=True)
     date_update = models.DateTimeField(blank=True, null=True)
-    env = models.ForeignKey(Enviroment, models.DO_NOTHING)
-    vlan_provider = models.ForeignKey('VlanProvider', models.DO_NOTHING)
+    env = models.ForeignKey(Enviroment, models.CASCADE)
+    vlan_provider = models.ForeignKey('VlanProvider', models.CASCADE)
 
     class Meta:
         managed = True
@@ -255,7 +260,7 @@ class Vlan(models.Model):
 
 
 class VlanProvider(models.Model):
-    id = models.CharField(primary_key=True, max_length=45)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(unique=True, max_length=30)
     address = models.CharField(max_length=60, blank=True, null=True)
     desc = models.CharField(max_length=60, blank=True, null=True)
