@@ -12,6 +12,16 @@ from device.models import Encoder
 from channel.models import Channel
 from agent.models import Agent
 
+class ProfileState(models.Model):
+    state = models.IntegerField(primary_key=True, blank=False, null=False)
+    name = models.CharField(unique=True, max_length=10, blank=False, null=False)
+    description = models.CharField(max_length=60, blank=True, null=True)
+    class Meta:
+        managed = True
+        db_table = 'profile_state'
+    def __str__(self):
+        return u'%s '%(self.name)
+        
 
 
 class ProfileQuality(models.Model):
@@ -50,6 +60,7 @@ class Profile(models.Model):
     vlan = models.ForeignKey(Vlan, models.CASCADE)
     is_original = models.BooleanField() 
     encoder = models.ForeignKey(Encoder, models.CASCADE)
+    status = models.ForeignKey(ProfileState, models.CASCADE, default=1)
 
     class Meta:
         managed = True
@@ -96,7 +107,7 @@ class Monitor(models.Model):
     date_update = models.DateTimeField(blank=True, null=True)
     agent = models.ForeignKey(Agent, models.CASCADE)
     profile = models.ForeignKey(Profile, models.CASCADE)
-
+    status = models.ForeignKey(ProfileState, models.CASCADE, default=1)
     class Meta:
         managed = True
         db_table = 'monitor'

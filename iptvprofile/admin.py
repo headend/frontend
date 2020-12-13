@@ -6,7 +6,8 @@ from .models import (
 					ProfileQuality,
 					EncoderInputProfile,
 					Monitor,
-					AgentHasGroupProfile
+					AgentHasGroupProfile,
+					ProfileState
 					)
 
 # Register your models here.
@@ -18,3 +19,4 @@ admin.site.register(ProfileQuality)
 admin.site.register(EncoderInputProfile)
 admin.site.register(Monitor)
 admin.site.register(AgentHasGroupProfile)
+admin.site.register(ProfileState)
