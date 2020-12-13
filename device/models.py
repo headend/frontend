@@ -23,6 +23,9 @@ class Encoder(models.Model):
     class Meta:
         managed = True
         db_table = 'encoder'
+    def __str__(self):
+        return u'%s '%(self.name)
+
 
 
 class EncoderHasVlan(models.Model):
@@ -34,6 +37,9 @@ class EncoderHasVlan(models.Model):
         managed = True
         db_table = 'encoder_has_vlan'
         unique_together = (('vlan', 'encoder'),)
+
+    def __str__(self):
+        return u'%s | vlanid %s'%(self.encoder, self.vlan)
 
 
 class SatelliteDishe(models.Model):
@@ -50,6 +56,8 @@ class SatelliteDishe(models.Model):
         managed = True
         db_table = 'satellite_dishe'
         unique_together = (('id', 'env'),)
+    def __str__(self):
+        return u'%s - enviroment %s'%(self.name, self.env)    
 
 
 class SatelliteDisheHasMulticastIp(models.Model):
@@ -61,5 +69,7 @@ class SatelliteDisheHasMulticastIp(models.Model):
         managed = True
         db_table = 'satellite_dishe_has_multicast_ip'
         unique_together = (('multicast_ip', 'satellite_dishe'),)
+    def __str__(self):
+        return u'%s | %s'%(self.satellite_dishe, self.multicast_ip)   
 
 

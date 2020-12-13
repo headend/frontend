@@ -22,6 +22,9 @@ class ProfileQuality(models.Model):
     class Meta:
         managed = True
         db_table = 'profile_quality'
+    def __str__(self):
+        return u'%s '%(self.quality)
+
 
 class GroupProfile(models.Model):
     id = models.AutoField(primary_key=True)
@@ -31,7 +34,8 @@ class GroupProfile(models.Model):
     class Meta:
         managed = True
         db_table = 'group_profile'
-
+    def __str__(self):
+        return u'%s '%(self.name)
 
 
 
@@ -51,6 +55,9 @@ class Profile(models.Model):
         managed = True
         db_table = 'profile'
         unique_together = (('profile_quality', 'channel', 'multicast_ip'),)
+    def __str__(self):
+        return u'Channel %s - type %s - ip %s '%(self.channel, self.profile_quality, self.multicast_ip  )
+
 
 
 class GroupProfileHasProfile(models.Model):
@@ -59,9 +66,11 @@ class GroupProfileHasProfile(models.Model):
     profile = models.ForeignKey(Profile, models.CASCADE)
 
     class Meta:
-        managed = True
+        managed = True  
         db_table = 'group_profile_has_profile'
         unique_together = (('profile', 'group_profile'),)
+    def __str__(self):
+        return u'Group %s has %s'%(self.group_profile, self.profile)
 
 class EncoderInputProfile(models.Model):
     id = models.AutoField(primary_key=True)
@@ -72,7 +81,8 @@ class EncoderInputProfile(models.Model):
         managed = True
         db_table = 'encoder_input_profile'
         unique_together = (('encoder', 'profile'),)
-
+    def __str__(self):
+        return u'Encoder %s has profile %s '%(self.encoder, self.profile)
 
 class Monitor(models.Model):
     id = models.AutoField(primary_key=True)
@@ -91,6 +101,8 @@ class Monitor(models.Model):
         managed = True
         db_table = 'monitor'
         unique_together = (('profile', 'agent'),)
+    def __str__(self):
+        return u'Monitor profile: %s on agent: %s'%(self.profile, self.agent)
 
 
 class AgentHasGroupProfile(models.Model):
@@ -102,3 +114,5 @@ class AgentHasGroupProfile(models.Model):
         managed = True
         db_table = 'agent_has_group_profile'
         unique_together = (('agent', 'group_profile'),)
+    def __str__(self):
+        return u'Agent: %s monitor group profile: %s'%(self.agent, self.group_profile)

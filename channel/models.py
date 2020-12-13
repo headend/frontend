@@ -18,6 +18,8 @@ class Channel(models.Model):
     class Meta:
         managed = True
         db_table = 'channel'
+    def __str__(self):
+        return u'%s '%(self.name)
 
 
 class GroupChannel(models.Model):
@@ -28,6 +30,8 @@ class GroupChannel(models.Model):
     class Meta:
         managed = True
         db_table = 'group_channel'
+    def __str__(self):
+        return u'%s '%(self.name)
 
 
 class GroupChannelHasChannel(models.Model):
@@ -39,3 +43,5 @@ class GroupChannelHasChannel(models.Model):
         managed = True
         db_table = 'group_channel_has_channel'
         unique_together = (('channel', 'group_channel'),)
+    def __str__(self):
+        return u'%s has %s'%(self.group_channel, self.channel)

@@ -18,6 +18,8 @@ class VlanProvider(models.Model):
     class Meta:
         managed = True
         db_table = 'vlan_provider'
+    def __str__(self):
+        return self.name
 
 class IptvEnviroment(models.Model):
     id = models.AutoField(primary_key=True)
@@ -27,7 +29,8 @@ class IptvEnviroment(models.Model):
     class Meta:
         managed = True
         db_table = 'enviroment'
-
+    def __str__(self):
+        return self.name
 
 class MulticastIp(models.Model):
     id = models.AutoField(primary_key=True)
@@ -37,7 +40,8 @@ class MulticastIp(models.Model):
     class Meta:
         managed = True
         db_table = 'multicast_ip'
-
+    def __str__(self):
+        return self.ip
 
 
 class UserHasMulticastIp(models.Model):
@@ -49,6 +53,8 @@ class UserHasMulticastIp(models.Model):
         managed = True
         db_table = 'user_has_multicast_ip'
         unique_together = (('multicast_ip', 'user'),)
+    def __str__(self):
+        return u'User %s has ip: %s'%(self.user.username, self.multicast_ip)
 
 
 class Vlan(models.Model):
@@ -65,5 +71,5 @@ class Vlan(models.Model):
         managed = True
         db_table = 'vlan'
         unique_together = (('vlan_provider', 'env', 'vlanid'),)
-
-
+    def __str__(self):
+        return u'Vlanid %s - %s - %s'%(self.vlanid, self.env, self.vlan_provider)

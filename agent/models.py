@@ -29,6 +29,8 @@ class Agent(models.Model):
     class Meta:
         managed = True
         db_table = 'agent'
+    def __str__(self):
+        return u'%s - %s'%(self.ip_control, self.location if self.location else "Plz set location")
 
 
 class AgentHasVlan(models.Model):
@@ -40,6 +42,7 @@ class AgentHasVlan(models.Model):
         managed = True
         db_table = 'agent_has_vlan'
         unique_together = (('vlan', 'agent'),)
-
+    def __str__(self):
+        return u'%s | Vlanid %s'%(self.agent,self.vlan.vlanid)
 
 
