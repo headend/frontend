@@ -9,8 +9,8 @@
 </div>
 <ul class="app-breadcrumb breadcrumb side">
   <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
-  <li class="breadcrumb-item">Server</li>
-  <li class="breadcrumb-item active"><a href="/agents/">Server</a></li>
+  <li class="breadcrumb-item">Agnets</li>
+  <li class="breadcrumb-item active"><a href="/agents/">Agents</a></li>
 </ul>
 </div>
 
@@ -54,32 +54,82 @@
         <table class="table table-hover table-bordered" id="dataTable">
           <thead>
             <tr>
-              <th>SID</th>
               <th>Name</th>
-              <th>Host</th>
-              <th>Port</th>
-              <th>Status</th>
-              <th>Open Date</th>
-              <th>Time has opened</th>
-              <th>Client</th>
-              <th>Control</th>
-              <th>Register</th>
+              <th>IP</th>
+              <th>IP-RMulticast</th>
+              <th>CPU</th>
+              <th>RAM</th>
+              <th>Disk</th>
+              <th>Location</th>
+              <th>Monitor</th>
+              <th>Alarm</th>
+              <th>Signal monitor</th>
+              <th>Video monitor</th>
+              <th>Audio monitor</th>
+              <th>Thread</th>
+              <th>Create</th>
+              <th>Update</th>
             </tr>
           </thead>
           <tbody>
-
-              {% for sid in data.servers %}
+            <tr>
+              <input type="checkbox" value="true" data-toggle="toggle">
+            </tr>
+              {% for aid in data.agents %}
               <tr>
-                  <td>{{ sid.sid }}</td>
-                  <td>{{ sid.name }}</td>
-                  <td>{{ sid.host }}</td>
-                  <td>{{ sid.port }}</td>
+                  <td>{{ aid.name }}</td>
+                  <td>{{ aid.ip_control }}</td>
+                  <td>{{ aid.ip_receive_muticast }}</td>
+                  <td>{{ aid.cpu }}</td>
+                  <td>{{ aid.ram }}</td>
+                  <td>{{ aid.disk }}</td>
+                  <td>{{ aid.location }}</td>
+                  <td>{{ aid.is_monitor }}
+                    {% if aid.is_monitor == 1%}
+                        <input id="monitor_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changeMonitor(this);">
+                    {% else %}
+                    {% endif %}
+                        <input id="monitor_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeMonitor(this);">
+                  </td>
+                  <td>{{ aid.is_alarm }}
+                    {% if aid.is_alarm == 1%}
+                        <input id="alarm_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changeAlarm(this);">
+                    {% else %}
+                    {% endif %}
+                        <input id="alarm_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeAlarm(this);">
+                  </td>
+                  <td>{{ aid.signal_monitor }}
+                    {% if aid.signal_monitor == 1 %}
+                        <input id="signal_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changesignal(this);">
+                    {% else %}
+                    {% endif %}
+                        <input id="signal_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeSignal(this);">
+                  </td>
+                  <td>{{ aid.video_monitor }}
+                    {% if aid.video_monitor == 1%}
+                        <input id="video_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changeVideo(this);">
+                    {% else %}
+                    {% endif %}
+                        <input id="video_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeVideo(this);">
+                  </td>
+                  <td>{{ aid.audio_monitor }}
+                    {% if aid.audio_monitor == 1%}
+                        <input id="audio_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changeAudio(this);">
+                    {% else %}
+                    {% endif %}
+                        <input id="audio_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeAudio(this);">
+                  </td>
+                  <td>{{ aid.run_thread }}</td>
+                  <input type="number" id="thread_{{ aid.id }}" name="thread_{{ aid.id }}" value="aid.run_thread" min="1" max="20">
+                  <td>{{ aid.date_create }}</td>
+                  <td>{{ aid.date_update }}</td>
                   <td>
                     <select class="form-control" id="select_state{{ sid.sid }}" name="{{ sid.sid }}" onchange="changeState(this);">
                     {% for state in data.states %}
                       {% if state.id == sid.status %}
                         <option selected value="{{ state.id }}">{{ state.name }} - {{ state.desc }}</option>
                       {% else %}
+                      {% endif %}
                         <option value="{{ state.id }}">{{ state.name }} - {{ state.desc }}</option>
                       {% endif %}
                     {% endfor %}
