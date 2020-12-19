@@ -22,10 +22,10 @@ class Agent(models.Model):
     signal_monitor = models.BooleanField()
     video_monitor = models.BooleanField()
     audio_monitor = models.BooleanField()
-    run_thread = models.IntegerField(blank=True, null=True)
+    run_thread   = models.IntegerField(blank=True, null=True)
     date_create = models.DateTimeField(blank=True, null=True)
     date_update = models.DateTimeField(blank=True, null=True)
-
+    status = models.BooleanField(default=False)
     class Meta:
         managed = True
         db_table = 'agent'
