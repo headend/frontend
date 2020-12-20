@@ -2,6 +2,8 @@
 {% block content %}
 <!-- <script type="text/javascript" src="/static/homepage/js/angular.min.js"></script>
  -->
+ <!-- <link rel="stylesheet" href="/static/homepage/css/bootstrap-multiselect.css">
+<script src="/static/homepage/js/bootstrap-multiselect.js"></script> -->
 <div class="app-title">
 <div>
   <h1><i class="fa fa-th-list"></i><a href="/agents/"> Server</a></h1>
@@ -23,7 +25,7 @@
             {% for ver in data.versions %}
             <option selected value="{{ ver }}">{{ ver }}</option>
             {% endfor %}
-            <option selected value="">---Choose version---</option>
+            <option selected value="">---Chose location---</option>
           </select>
         </div>
 
@@ -54,9 +56,9 @@
         <table class="table table-hover table-bordered" id="dataTable">
           <thead>
             <tr>
-              <th>Name</th>
               <th>IP</th>
-              <th>IP-RMulticast</th>
+              <!-- <th>IP-RMulticast</th> -->
+              <!-- <th>Vlan</th> -->
               <th>CPU</th>
               <th>RAM</th>
               <th>Disk</th>
@@ -67,113 +69,121 @@
               <th>Video monitor</th>
               <th>Audio monitor</th>
               <th>Thread</th>
-              <th>Create</th>
-              <th>Update</th>
+              <!-- <th>Create</th>
+              <th>Update</th> -->
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <input type="checkbox" value="true" data-toggle="toggle">
-            </tr>
-              {% for aid in data.agents %}
+          <!-- barse data agent -->
+              {% for aid in data %}
               <tr>
-                  <td>{{ aid.name }}</td>
-                  <td>{{ aid.ip_control }}</td>
-                  <td>{{ aid.ip_receive_muticast }}</td>
-                  <td>{{ aid.cpu }}</td>
-                  <td>{{ aid.ram }}</td>
-                  <td>{{ aid.disk }}</td>
-                  <td>{{ aid.location }}</td>
-                  <td>{{ aid.is_monitor }}
-                    {% if aid.is_monitor == 1%}
-                        <input id="monitor_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changeMonitor(this);">
-                    {% else %}
-                    {% endif %}
-                        <input id="monitor_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeMonitor(this);">
+                  <td>
+                    <label id="ipcontrol-{{ aid.id }}" name="ipcontrol-{{ aid.id }}">{{ aid.ip_control }}</label>
                   </td>
-                  <td>{{ aid.is_alarm }}
+                  <!-- <td>
+                    <label id="ipmulticast-{{ aid.id }}" name="ipmulticast-{{ aid.id }}">{{ aid.ip_receive_muticast }}</label>
+                    </td> -->
+                  <!-- <td>
+                    
+                  </td> -->
+                  <td>
+                    {% if aid.cpu == None %}
+                      <p id="cpu-{{ aid.id }}">0</p>
+                    {% else %}
+                      <p id="cpu-{{ aid.id }}">{{aid.cpu}}</p>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if aid.ram == None %}
+                      <p id="ram-{{ aid.id }}">0</p>
+                    {% else %}
+                      <p id="ram-{{ aid.id }}">{{aid.ram}}</p>
+                    {% endif %}
+                  </td>
+                   <td>
+                    {% if aid.disk == None %}
+                      <p id="disk-{{ aid.id }}">0</p>
+                    {% else %}
+                      <p id="disk-{{ aid.id }}">{{aid.disk}}</p>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <input id='location-{{ aid.id }}' type='text' value='{{aid.location}}'>
+                  </td>
+                  <td>
+                    {% if aid.is_monitor == 1 %}
+                        <input id="monitor-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                    {% else %}
+                        <input id="monitor-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                    {% endif %}
+                  </td>
+                  <td>
                     {% if aid.is_alarm == 1%}
-                        <input id="alarm_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changeAlarm(this);">
+                        <input id="alarm-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
+                    
+                        <input id="alarm-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
-                        <input id="alarm_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeAlarm(this);">
                   </td>
-                  <td>{{ aid.signal_monitor }}
+                  <td>
                     {% if aid.signal_monitor == 1 %}
-                        <input id="signal_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changesignal(this);">
+                        <input id="signal-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
+                    
+                        <input id="signal-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
-                        <input id="signal_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeSignal(this);">
                   </td>
-                  <td>{{ aid.video_monitor }}
+                  <td>
                     {% if aid.video_monitor == 1%}
-                        <input id="video_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changeVideo(this);">
+                        <input id="video-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
+                    
+                        <input id="video-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
-                        <input id="video_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeVideo(this);">
                   </td>
-                  <td>{{ aid.audio_monitor }}
+                  <td>
                     {% if aid.audio_monitor == 1%}
-                        <input id="audio_{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="changeAudio(this);">
+                        <input id="audio-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
+                        <input id="audio-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
-                        <input id="audio_{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="changeAudio(this);">
-                  </td>
-                  <td>{{ aid.run_thread }}</td>
-                  <input type="number" id="thread_{{ aid.id }}" name="thread_{{ aid.id }}" value="aid.run_thread" min="1" max="20">
-                  <td>{{ aid.date_create }}</td>
-                  <td>{{ aid.date_update }}</td>
-                  <td>
-                    <select class="form-control" id="select_state{{ sid.sid }}" name="{{ sid.sid }}" onchange="changeState(this);">
-                    {% for state in data.states %}
-                      {% if state.id == sid.status %}
-                        <option selected value="{{ state.id }}">{{ state.name }} - {{ state.desc }}</option>
-                      {% else %}
-                      {% endif %}
-                        <option value="{{ state.id }}">{{ state.name }} - {{ state.desc }}</option>
-                      {% endif %}
-                    {% endfor %}
-            </select>
-                  </td>
-                  <td>{{ sid.timestamps.open }}</td>
-                  <td>{{ sid.timestamps.time_has_opened }}</td>
-                  <td>{{ sid.client_version }}</td>
-                  <td>
-                    <button id="{{ sid.sid }}" name="start_{{sid.host}}" type="button" class="btn btn-sm btn-primary" onclick="serverControl(this)">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                      <span><strong>Start</strong></span> 
-                    </button>
-                    <button id="{{ sid.sid }}" name="restart_{{sid.host}}" type="button" class="btn btn-sm btn-warning" onclick="serverControl(this)">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                      <span><strong>Restart</strong></span> 
-                    </button>
-
-                    <button id="{{ sid.sid }}" name="stop_{{sid.host}}" type="button" class="btn btn-sm btn-danger" onclick="serverControl(this)">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                      <span><strong>Stop</strong></span> 
-                    </button>
                   </td>
                   <td>
-                    {% if sid.status != 1 %}
-                    <button id="{{ sid.sid }}" name="allow" type="button" class="btn btn-sm btn-primary" onclick="serverControlRegister(this)">
+                     <input type="number" id="thread-{{ aid.id }}" name="thread-{{ aid.id }}" value="{{ aid.run_thread }}" min="1" max="20">
+                  </td>
+                  <!-- <td>
+                    {% if aid.date_create == None %}
+                      <p id="datecreate-{{ aid.id }}">0</p>
+                    {% else %}
+                      <p id="datecreate-{{ aid.id }}">{{aid.date_create}}</p>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if aid.date_update == None %}
+                      <p id="dateupdate-{{ aid.id }}">0</p>
+                    {% else %}
+                      <p id="dateupdate-{{ aid.id }}">{{aid.date_update}}</p>
+                    {% endif %}
+                  </td> -->
+                  <td>
+                    <button id="btnUpdate-{{aid.id}}" name="allow" type="button" class="btn btn-sm btn-primary" onclick="agentUpdate({{ aid.id }})">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                      <span><strong>Allow</strong></span> 
+                      <span><strong>Update</strong></span> 
                     </button>
-
-                    <button id="{{ sid.sid }}" name="deny" type="button" class="btn btn-sm btn-warning" onclick="serverControlRegister(this)">
+                    
+                    <button id="btnDelete-{{ aid.id }}" name="deny" type="button" class="btn btn-sm btn-warning" onclick="agentDete(this)">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                       <span><strong>Deny</strong></span> 
                     </button>
-                    {% endif %}
                   </td>
-              </tr>
+                  </tr>
               {% endfor %}      
-            
+          <!-- barse data agent --> 
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div> <!-- end row  -->
-
 {% endblock %}
