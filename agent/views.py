@@ -32,6 +32,7 @@ def updateAgent(request):
             video = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('video')]) if agent.is_monitor != request.POST.get('video') else "Error Post" 
             audio = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('audio')]) if agent.is_monitor != request.POST.get('audio') else "Error Post" 
             agent.is_monitor = request.POST.get('monitor', '')
+            agent.status = request.POST.get('monitor', '')
             agent.location = request.POST.get('location', '')
             agent.is_alarm = request.POST.get('alarm', '')
             agent.signal_monitor = request.POST.get('signal', '')

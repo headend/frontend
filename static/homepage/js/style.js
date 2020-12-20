@@ -35,6 +35,7 @@ function getAgentColumn(select_id) {
     "disk": $('#disk-'+select_id).text(),
     "location": $('#location-'+select_id).val(),
     "monitor": $('#monitor-'+select_id).prop("checked") ? 1 : 0,
+    "status": $('#status-'+select_id).prop("checked") ? 1 : 0,
     "alarm": $('#alarm-'+select_id).prop("checked") ? 1 : 0,
     "signal": $('#signal-'+select_id).prop("checked") ? 1 : 0,
     "video": $('#video-'+select_id).prop("checked") ? 1 : 0,

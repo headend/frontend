@@ -64,6 +64,7 @@
               <th>Disk</th>
               <th>Location</th>
               <th>Monitor</th>
+              <th>Status</th>
               <th>Alarm</th>
               <th>Signal monitor</th>
               <th>Video monitor</th>
@@ -116,6 +117,13 @@
                         <input id="monitor-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
                     {% else %}
                         <input id="monitor-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if aid.status == 1 %}
+                        <input id="status-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                    {% else %}
+                        <input id="status-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
                     {% endif %}
                   </td>
                   <td>
@@ -174,7 +182,7 @@
                     
                     <button id="btnDelete-{{ aid.id }}" name="deny" type="button" class="btn btn-sm btn-warning" onclick="agentDete(this)">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                      <span><strong>Deny</strong></span> 
+                      <span><strong>Delete</strong></span> 
                     </button>
                   </td>
                   </tr>
