@@ -28,9 +28,9 @@ def updateAgent(request):
             "control_id": None,
             "TunnelData": ""} 
             monitor = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('monitor')]) if agent.is_monitor != request.POST.get('monitor') else "Error Post" 
-            signal = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('signal')]) if agent.is_monitor != request.POST.get('signal') else "Error Post" 
-            video = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('video')]) if agent.is_monitor != request.POST.get('video') else "Error Post" 
-            audio = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('audio')]) if agent.is_monitor != request.POST.get('audio') else "Error Post" 
+            signal = pushWorker(data=data,host=WORKER["host"],uri=WORKER["signal"][request.POST.get('signal')]) if agent.signal_monitor != request.POST.get('signal') else "Error Post" 
+            video = pushWorker(data=data,host=WORKER["host"],uri=WORKER["video"][request.POST.get('video')]) if agent.video_monitor != request.POST.get('video') else "Error Post" 
+            audio = pushWorker(data=data,host=WORKER["host"],uri=WORKER["audio"][request.POST.get('audio')]) if agent.audio_monitor != request.POST.get('audio') else "Error Post" 
             agent.is_monitor = request.POST.get('monitor', '')
             agent.status = request.POST.get('monitor', '')
             agent.location = request.POST.get('location', '')
