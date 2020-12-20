@@ -22,6 +22,50 @@ function get_timestamp() {
   // body...
   return Math.floor(new Date().getTime()/1000.0)
 }
+function execute_update_agent(){
+
+}
+function getAgentColumn(select_id) {
+  data = {
+    "id": select_id,
+    "ip_control": $('#ipcontrol-'+select_id).text(),
+    "ip_receive_multicast": $('#ipmulticast-'+select_id).text(),
+    "cpu": $('#cpu-'+select_id).text(),
+    "ram": $('#ram-'+select_id).text(),
+    "disk": $('#disk-'+select_id).text(),
+    "location": $('#location-'+select_id).val(),
+    "monitor": $('#monitor-'+select_id).prop("checked") ? 1 : 0,
+    "alarm": $('#alarm-'+select_id).prop("checked") ? 1 : 0,
+    "signal": $('#signal-'+select_id).prop("checked") ? 1 : 0,
+    "video": $('#video-'+select_id).prop("checked") ? 1 : 0,
+    "audio": $('#audio-'+select_id).prop("checked") ? 1 : 0,
+    "thread": $('#thread-'+select_id).val(),
+  };
+  console.log(data);
+  return data;
+}
+
+function onChangeCheckBox(select_obj) {
+  var tmp = $('#'+select_obj).is(":checked");
+  $('#'+select_obj).prop('checked', tmp); 
+}
+
+function agentUpdate(select_obj) {
+  data = getAgentColumn(select_obj);
+  $('#loading').show();
+  if (confirm("You update this agent?")){
+    $.post("/agents/update/", data, function(result){
+      $('#loading').hide();
+      alert(result);
+      location.reload();
+    });  
+  }
+  else {
+    var txt = "Cancel";
+    $('#loading').hide();
+    alert(txt);
+  }
+}
 
 function changeDatetime(sync) {
 	var data;
@@ -289,4 +333,3 @@ function addWhitelist(){
     location.href="/servers/whitelist/add/" + newip + "/?ts=" + ts;
   }
 }
-
