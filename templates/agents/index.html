@@ -4,6 +4,7 @@
  -->
  <!-- <link rel="stylesheet" href="/static/homepage/css/bootstrap-multiselect.css">
 <script src="/static/homepage/js/bootstrap-multiselect.js"></script> -->
+
 <div class="app-title">
 <div>
   <h1><i class="fa fa-th-list"></i><a href="/agents/"> Server</a></h1>
@@ -17,7 +18,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <!-- <div class="col-md-12">
     <div class="tile">
       <form class="row" id="frmreport" name="frmreport" method="POST">
         <div class="form-group col-md-3">
@@ -46,8 +47,8 @@
             <button class="btn btn-sm btn-primary" type="button" onclick="reportlevelexport()"><i class="fa fa-fw fa-lg fa-check-circle"></i>Export</button>
         </div>
       </form>
-    </div> <!-- End title -->
-  </div>
+    </div>  End title 
+  </div> -->
 
   <div class="clearix"></div>
   <div class="col-md-12">
@@ -59,13 +60,13 @@
               <th>IP</th>
               <!-- <th>IP-RMulticast</th> -->
               <!-- <th>Vlan</th> -->
-              <th>CPU</th>
-              <th>RAM</th>
-              <th>Disk</th>
+              <!-- <th>CPU</th> -->
+              <!-- <th>RAM</th> -->
+              <!-- <th>Disk</th> -->
               <th>Location</th>
               <th>Monitor</th>
               <th>Status</th>
-              <th>Alarm</th>
+              <!-- <th>Alarm</th> -->
               <th>Signal monitor</th>
               <th>Video monitor</th>
               <th>Audio monitor</th>
@@ -88,7 +89,7 @@
                   <!-- <td>
                     
                   </td> -->
-                  <td>
+                  <!-- <td>
                     {% if aid.cpu == None %}
                       <p id="cpu-{{ aid.id }}">0</p>
                     {% else %}
@@ -108,53 +109,56 @@
                     {% else %}
                       <p id="disk-{{ aid.id }}">{{aid.disk}}</p>
                     {% endif %}
-                  </td>
+                  </td> -->
                   <td>
                     <input id='location-{{ aid.id }}' type='text' value='{{aid.location}}'>
                   </td>
                   <td>
                     {% if aid.is_monitor == 1 %}
-                        <input id="monitor-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                        <input id="monitor-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
                     {% else %}
-                        <input id="monitor-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                        <input id="monitor-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
                     {% endif %}
                   </td>
                   <td>
                     {% if aid.status == 1 %}
-                        <input id="status-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                      <div>
+                        <i class="bi bi-emoji-dizzy"></i>
+                      </div>
+                        <!-- <input id="status-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" > -->
                     {% else %}
-                        <input id="status-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                        <input id="status-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
                     {% endif %}
                   </td>
-                  <td>
+                  <!-- <td>
                     {% if aid.is_alarm == 1%}
-                        <input id="alarm-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="alarm-{{ aid.id }}" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                     
-                        <input id="alarm-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="alarm-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
-                  </td>
+                  </td> -->
                   <td>
                     {% if aid.signal_monitor == 1 %}
-                        <input id="signal-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="signal-{{ aid.id }}" type="checkbox" checked  data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger "data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                     
-                        <input id="signal-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="signal-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
                   </td>
                   <td>
                     {% if aid.video_monitor == 1%}
-                        <input id="video-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="video-{{ aid.id }}" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                     
-                        <input id="video-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="video-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
                   </td>
                   <td>
                     {% if aid.audio_monitor == 1%}
-                        <input id="audio-{{ aid.id }}" type="checkbox" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="audio-{{ aid.id }}" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
-                        <input id="audio-{{ aid.id }}" type="checkbox" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="audio-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
                   </td>
                   <td>
@@ -175,12 +179,12 @@
                     {% endif %}
                   </td> -->
                   <td>
-                    <button id="btnUpdate-{{aid.id}}" name="allow" type="button" class="btn btn-sm btn-primary" onclick="agentUpdate({{ aid.id }})">
+                    <button id="btnUpdate-{{aid.id}}" name="update" type="button" class="btn btn-sm btn-primary" onclick="agentUpdate({{ aid.id }});">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                       <span><strong>Update</strong></span> 
                     </button>
                     
-                    <button id="btnDelete-{{ aid.id }}" name="deny" type="button" class="btn btn-sm btn-warning" onclick="agentDete(this)">
+                    <button id="btnDelete-{{ aid.id }}" name="delete" type="button" class="btn btn-sm btn-danger" onclick="agentDete({{ aid.id }});">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                       <span><strong>Delete</strong></span> 
                     </button>

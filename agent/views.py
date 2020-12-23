@@ -27,12 +27,24 @@ def updateAgent(request):
             "agent_id": agent.id,
             "control_id": None,
             "TunnelData": ""} 
-            monitor = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('monitor')]) if agent.is_monitor != request.POST.get('monitor') else "Error Post" 
-            signal = pushWorker(data=data,host=WORKER["host"],uri=WORKER["signal"][request.POST.get('signal')]) if agent.signal_monitor != request.POST.get('signal') else "Error Post" 
-            video = pushWorker(data=data,host=WORKER["host"],uri=WORKER["video"][request.POST.get('video')]) if agent.video_monitor != request.POST.get('video') else "Error Post" 
-            audio = pushWorker(data=data,host=WORKER["host"],uri=WORKER["audio"][request.POST.get('audio')]) if agent.audio_monitor != request.POST.get('audio') else "Error Post" 
-            agent.is_monitor = request.POST.get('monitor', '')
-            agent.status = request.POST.get('monitor', '')
+            respo = {}
+            if agent.is_monitor != request.POST.get('monitor'):
+                respo["monitor"] = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('monitor')])
+            else:
+                respo["monitor"] = "No change"
+            if agent.signal_monitor == request.POST.get('signal'):
+                respo["signal"] = pushWorker(data=data,host=WORKER["host"],uri=WORKER["signal"][request.POST.get('signal')]) 
+            else:
+                respo["signal"] = "No change"
+            if agent.video_monitor == request.POST.get('video'):
+                respo["video"] = pushWorker(data=data,host=WORKER["host"],uri=WORKER["video"][request.POST.get('video')])
+            else:
+                respo["video"] = "No change"
+            if agent.audio_monitor == request.POST.get('audio'):
+                respo["audio"] = pushWorker(data=data,host=WORKER["host"],uri=WORKER["audio"][request.POST.get('audio')])
+            else:
+                respo["audio"] = "No change"
+            agent.status = request.POST.get('status', '')
             agent.location = request.POST.get('location', '')
             agent.is_alarm = request.POST.get('alarm', '')
             agent.signal_monitor = request.POST.get('signal', '')
@@ -40,7 +52,7 @@ def updateAgent(request):
             agent.audio_monitor = request.POST.get('audio', '')
             agent.run_thread = request.POST.get('thread', 0)
             agent.save()
-            print("is monitor {0}".format(monitor))
+            print("is monitor {0}".format(respo["monitor"]))
             return HttpResponse("update ok",status=200, content_type="application/text")
         except Exception as e:
             print(e)
@@ -62,4 +74,17 @@ def pushWorker(data,host,uri):
     except Exception as e:
         print(e)
         return 500
+@csrf_exempt
+def deleteAgent(request, id):
+    if request.method == "DELETE":
+        print(type(id))
+        try:
+            agent = Agent.objects.get(id=id)
+            agent.delete()
+            msg = "Deleted agent {0}".format(id)
+            return HttpResponse(msg,status=201)
+        except Exception as e:
+            print (e)
+            return HttpResponse("Have Error", status=500)
+    return HttpResponse("Have Error",status=500)
 # Create your views here.

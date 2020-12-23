@@ -68,6 +68,28 @@ function agentUpdate(select_obj) {
   }
 }
 
+function agentDete(select_obj) {
+  $('#loading').show();
+  if (confirm("You delelte this agent: "+select_obj)){
+      $.ajax({
+        url:"/agents/delete/"+select_obj,
+        method: 'DELETE',
+        contentType: 'application/json',
+        success: function(result,status) {
+            // handle success
+            console.log(status);
+            alert(status);
+            $('#loading').hide();
+            location.reload();
+        },
+        error: function(request,msg,error) {
+            // handle failure
+            alert(msg);
+            $('#loading').hide();
+        }
+    });
+  }
+}
 function changeDatetime(sync) {
 	var data;
 	if (sync == true) {
