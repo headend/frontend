@@ -4,7 +4,7 @@
  -->
  <!-- <link rel="stylesheet" href="/static/homepage/css/bootstrap-multiselect.css">
 <script src="/static/homepage/js/bootstrap-multiselect.js"></script> -->
-
+<link rel="stylesheet" href="/static/homepage/css/icon.css">
 <div class="app-title">
 <div>
   <h1><i class="fa fa-th-list"></i><a href="/agents/"> Server</a></h1>
@@ -121,14 +121,14 @@
                     {% endif %}
                   </td>
                   <td>
+                    <div>
                     {% if aid.status == 1 %}
-                      <div>
-                        <i class="bi bi-emoji-dizzy"></i>
-                      </div>
+                       <i id="status-{{aid.id}}" class='bi-x-circle-fill'></i>
                         <!-- <input id="status-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" > -->
                     {% else %}
-                        <input id="status-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
+                      <i id="status-{{aid.id}}" class='bi-check-circle-fill'></i>
                     {% endif %}
+                    </div>
                   </td>
                   <!-- <td>
                     {% if aid.is_alarm == 1%}
