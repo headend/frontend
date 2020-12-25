@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- <script type="text/javascript" src="/static/homepage/js/angular.min.js"></script>
+ -->
+ <!-- <link rel="stylesheet" href="/static/homepage/css/bootstrap-multiselect.css">
+<script src="/static/homepage/js/bootstrap-multiselect.js"></script> -->
+<link rel="stylesheet" href="/static/homepage/css/icon.css">
+<link rel="stylesheet" href="/static/homepage/css/font-awesome.min.css">
+
+<div class="app-title">
+<div>
+  <h1><i class="fa fa-th-list"></i><a href="/monitor/">HOME</a></h1>
+  
+</div>
+<ul class="app-breadcrumb breadcrumb side">
+  <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+  <li class="breadcrumb-item">Agnets</li>
+  <li class="breadcrumb-item active"><a href="/monitor/">Agents</a></li>
+</ul>
+</div>
+
+<div class="row">
+  <div class="clearix"></div>
+  <div class="col-md-12">
+    <div class="tile">
+      <div class="tile-body">
+        <table class="table table-hover table-bordered" id="dataTable">
+          <thead>
+            <tr>
+              <th>IP</th>
+              <th>Agent</th>
+              <th>Channel</th>
+              <th>Signal status</th>
+              <th>Signal monitor</th>
+              <th>Video monitor</th>
+              <th>Video status</th>
+              <th>Audio monitor</th>
+              <th>Audio status</th>
+              <th>Enable</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+          <!-- barse data agent -->
+              {% for item in data %}
+              <tr>
+                  <td>
+                    <label id="ipmulticast-{{ item.id }}" name="ipcontrol-{{ item.id }}">{{ item.profile.multicast_ip }}</label>
+                  </td>
+                  <td>
+                    <label id='location-{{ item.id }}' type='text' name='location-{{ item.id}}' value='{{item.agent.location}}'>{{item.agent.location}}
+                  </td>
+                  <td>
+                    <label id='channle-{{item.id}}' type='text' value='{{item.profile.channel}}'>{{item.profile.channel}}</label>
+                  </td>
+                  <td>
+                    <div >
+                      {% if item.signal_monitor != 1%}
+                        <i id="sigmonitor-{{item.id}}" class='bi-x-circle-fill'></i>
+                      {% else %}
+                        <i id="sigmonitor-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% endif %}
+                    </div>
+                  </td>
+                  <td>
+                    <div >
+                      {% if item.status_signal != 1%}
+                        <i id="sigstatus-{{item.id}}" class='bi-x-circle-fill'></i>
+                      {% else %}
+                        <i id="sigstatus-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% endif %}
+                    </div>
+                  </td>
+                  <td>
+                    <div >
+                      {% if item.video_monitor != 1%}
+                        <i id="vidmonitor-{{item.id}}" class='bi-x-circle-fill'></i>
+                      {% else %}
+                        <i id="vidmonitor-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% endif %}
+                    </div>
+                  </td>
+                  <td>
+                    <div >
+                      {% if item.status_video != 1%}
+                        <i id="vidstatus-{{item.id}}" class='bi-x-circle-fill'></i>
+                      {% else %}
+                        <i id="vidstatus-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% endif %}
+                    </div>
+                  </td>
+                  <td>
+                    <div >
+                      {% if item.audio_monitor != 1%}
+                        <i id="audmonitor-{{item.id}}" class='bi-x-circle-fill'></i>
+                      {% else %}
+                        <i id="audmonitor-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% endif %}
+                    </div>
+                  </td>
+                  <td>
+                    <div >
+                      {% if item.status_audio != 1%}
+                        <i id="audstatus-{{item.id}}" class='bi-x-circle-fill'></i>
+                      {% else %}
+                        <i id="audstatus-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% endif %}
+                    </div>
+                  </td>
+                  <td>
+                    <div >
+                      {% if item.is_enable != 1%}
+                        <i id="isenable-{{item.id}}" class='bi-x-circle-fill'></i>
+                      {% else %}
+                        <i id="isenable-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% endif %}
+                    </div>
+                  </td>
+                 </tr>
+              {% endfor %}      
+          <!-- barse data agent --> 
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> <!-- end row  -->
+{% endblock %}
