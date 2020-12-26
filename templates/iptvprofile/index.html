@@ -13,9 +13,9 @@
   
 </div>
 <ul class="app-breadcrumb breadcrumb side">
-  <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
-  <li class="breadcrumb-item">Agnets</li>
-  <li class="breadcrumb-item active"><a href="/monitor/">Agents</a></li>
+  <li class="breadcrumb-item"><a href="/monitor/"><i class="fa fa-home fa-lg"></i></a></li>
+  <li class="breadcrumb-item">Monitor</li>
+  <li class="breadcrumb-item active"><a href="/agents/">Agents</a></li>
 </ul>
 </div>
 
@@ -30,7 +30,7 @@
               <th>IP</th>
               <th>Agent</th>
               <th>Channel</th>
-              <th>Signal status</th>
+              <th>Status</th>
               <th>Signal monitor</th>
               <th>Video monitor</th>
               <th>Video status</th>
@@ -45,74 +45,74 @@
               {% for item in data %}
               <tr>
                   <td>
-                    <label id="ipmulticast-{{ item.id }}" name="ipcontrol-{{ item.id }}">{{ item.profile.multicast_ip }}</label>
+                    <label id="ipmulticast-{{ item.id }}" name="ipcontrol-{{ item.id }}">{{ item.mulip }}</label>
                   </td>
                   <td>
-                    <label id='location-{{ item.id }}' type='text' name='location-{{ item.id}}' value='{{item.agent.location}}'>{{item.agent.location}}
+                    <label id='location-{{ item.id }}' type='text' name='location-{{ item.id}}' value='{{item.location}}'>{{item.location}}
                   </td>
                   <td>
-                    <label id='channle-{{item.id}}' type='text' value='{{item.profile.channel}}'>{{item.profile.channel}}</label>
+                    <label id='channle-{{item.id}}' type='text' value='{{item.profile.channel}}'>{{item.channel}}</label>
                   </td>
                   <td>
-                    <div >
-                      {% if item.signal_monitor != 1%}
-                        <i id="sigmonitor-{{item.id}}" class='bi-x-circle-fill'></i>
+                    <div class="content_center" >
+                      {% if item.status == 1%}
+                        <i id="status-{{item.id}}" class='bi-check-circle-fill'></i>
                       {% else %}
-                        <i id="sigmonitor-{{item.id}}" class='bi-check-circle-fill'></i>
+                        <i id="status-{{item.id}}" class='bi-x-circle-fill'></i>
                       {% endif %}
                     </div>
                   </td>
                   <td>
-                    <div >
-                      {% if item.status_signal != 1%}
-                        <i id="sigstatus-{{item.id}}" class='bi-x-circle-fill'></i>
+                    <div class="content_center" >
+                      {% if item.sigmonitor == 1%}
+                        <i id="sigmonitor-{{item.id}}" class='bi-toggle-on'></i>
                       {% else %}
-                        <i id="sigstatus-{{item.id}}" class='bi-check-circle-fill'></i>
+                        <i id="sigmonitor-{{item.id}}" class='bi-toggle-off'></i>
                       {% endif %}
                     </div>
                   </td>
                   <td>
-                    <div >
-                      {% if item.video_monitor != 1%}
-                        <i id="vidmonitor-{{item.id}}" class='bi-x-circle-fill'></i>
+                    <div class="content_center">
+                      {% if item.vidmonitor == 1%}
+                        <i id="vidmonitor-{{item.id}}" class='bi-toggle-on'></i>
                       {% else %}
-                        <i id="vidmonitor-{{item.id}}" class='bi-check-circle-fill'></i>
+                        <i id="vidmonitor-{{item.id}}" class='bi-toggle-off'></i>
                       {% endif %}
                     </div>
                   </td>
                   <td>
-                    <div >
-                      {% if item.status_video != 1%}
-                        <i id="vidstatus-{{item.id}}" class='bi-x-circle-fill'></i>
-                      {% else %}
+                    <div class="content_center">
+                      {% if item.vidstatus == 1%}
                         <i id="vidstatus-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% else %}
+                        <i id="vidstatus-{{item.id}}" class='bi-x-circle-fill'></i>
                       {% endif %}
                     </div>
                   </td>
                   <td>
-                    <div >
-                      {% if item.audio_monitor != 1%}
-                        <i id="audmonitor-{{item.id}}" class='bi-x-circle-fill'></i>
+                    <div class="content_center">
+                      {% if item.audmonitor == 1%}
+                        <i id="audmonitor-{{item.id}}" class='bi-toggle-on'></i>
                       {% else %}
-                        <i id="audmonitor-{{item.id}}" class='bi-check-circle-fill'></i>
+                        <i id="audmonitor-{{item.id}}" class='bi-toggle-off'></i>
                       {% endif %}
                     </div>
                   </td>
                   <td>
-                    <div >
-                      {% if item.status_audio != 1%}
-                        <i id="audstatus-{{item.id}}" class='bi-x-circle-fill'></i>
-                      {% else %}
+                    <div class="content_center">
+                      {% if item.audstatus == 1%}
                         <i id="audstatus-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% else %}
+                        <i id="audstatus-{{item.id}}" class='bi-x-circle-fill'></i>
                       {% endif %}
                     </div>
                   </td>
                   <td>
-                    <div >
-                      {% if item.is_enable != 1%}
-                        <i id="isenable-{{item.id}}" class='bi-x-circle-fill'></i>
-                      {% else %}
+                    <div class="content_center">
+                      {% if item.isenable == 1%}
                         <i id="isenable-{{item.id}}" class='bi-check-circle-fill'></i>
+                      {% else %}
+                        <i id="isenable-{{item.id}}" class='bi-x-circle-fill'></i>
                       {% endif %}
                     </div>
                   </td>
@@ -125,4 +125,6 @@
     </div>
   </div>
 </div> <!-- end row  -->
+ <script src=/static/homepage/js/jquery-3.2.1.min.js></script>
+ <script src="/static/homepage/js/proflie.js"></script>
 {% endblock %}

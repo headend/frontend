@@ -13,7 +13,7 @@
 <ul class="app-breadcrumb breadcrumb side">
   <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
   <li class="breadcrumb-item">Agnets</li>
-  <li class="breadcrumb-item active"><a href="/agents/">Agents</a></li>
+  <li class="breadcrumb-item active"><a href="/monitor/">Monitor</a></li>
 </ul>
 </div>
 
@@ -87,7 +87,6 @@
                     <label id="ipmulticast-{{ aid.id }}" name="ipmulticast-{{ aid.id }}">{{ aid.ip_receive_muticast }}</label>
                     </td> -->
                   <!-- <td>
-                    
                   </td> -->
                   <!-- <td>
                     {% if aid.cpu == None %}
@@ -111,17 +110,19 @@
                     {% endif %}
                   </td> -->
                   <td>
-                    <input id='location-{{ aid.id }}' type='text' value='{{aid.location}}'>
+                    <input disabled id='location-{{ aid.id }}' type='text' value='{{aid.location}}'>
                   </td>
                   <td>
+                    <div class="content_center">
                     {% if aid.is_monitor == 1 %}
                         <input id="monitor-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
                     {% else %}
                         <input id="monitor-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
                     {% endif %}
+                    </div>
                   </td>
                   <td>
-                    <div>
+                    <div class="content_center">
                     {% if aid.status == 1 %}
                        <i id="status-{{aid.id}}" class='bi-x-circle-fill'></i>
                         <!-- <input id="status-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" > -->
@@ -139,27 +140,33 @@
                     {% endif %}
                   </td> -->
                   <td>
+                    <div class="content_center">
                     {% if aid.signal_monitor == 1 %}
                         <input id="signal-{{ aid.id }}" type="checkbox" checked  data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger "data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                     
                         <input id="signal-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
+                    </div>
                   </td>
                   <td>
+                    <div class="content_center">
                     {% if aid.video_monitor == 1%}
                         <input id="video-{{ aid.id }}" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                     
                         <input id="video-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
+                    </div>
                   </td>
                   <td>
+                    <div class="content_center">
                     {% if aid.audio_monitor == 1%}
                         <input id="audio-{{ aid.id }}" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                         <input id="audio-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% endif %}
+                    </div>
                   </td>
                   <td>
                      <input type="number" id="thread-{{ aid.id }}" name="thread-{{ aid.id }}" value="{{ aid.run_thread }}" min="1" max="20">

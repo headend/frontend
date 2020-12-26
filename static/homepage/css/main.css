@@ -14865,3 +14865,7 @@ be a descendant of the grid when it is being dragged.
   left: 240px;
   z-index: 100;
 }
+
+.content_center {
+  text-align: center;
+}
