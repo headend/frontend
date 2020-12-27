@@ -13,6 +13,7 @@ def index(request):
     template = loader.get_template('iptvprofile/index.html')
     data = Monitor.objects.select_related('agent','profile').values('id','status',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),channel=F('profile__channel__name'),
     sigmonitor=F("signal_monitor"),vidmonitor=F('video_monitor'),vidstatus=F('status_video'),audmonitor=F('audio_monitor'), audstatus=F('status_audio'),isenable=F('is_enable'),
+    quality=F('profile__profile_quality__quality'),
     )
     # data = list(data)
     print(data)
@@ -33,8 +34,9 @@ def getId(request):
 
 def updateStatus(request):
     if request.method == "GET":
-        data = list(Monitor.objects.select_related('agent','profile').values('id','status',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),chanle=F('profile__channel__name'),
+        data = list(Monitor.objects.select_related('agent','profile').values('id','status',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),channel=F('profile__channel__name'),
         sigmonitor=F("signal_monitor"),vidmonitor=F('video_monitor'),vidstatus=F('status_video'),audmonitor=F('audio_monitor'), audstatus=F('status_audio'),isenable=F('is_enable'),
+        quality=F('profile__profile_quality__quality'),
         ))
         return HttpResponse(json.dumps(data),status=200,content_type="application/json")
     else:

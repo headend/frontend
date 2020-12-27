@@ -30,6 +30,7 @@
               <th>IP</th>
               <th>Agent</th>
               <th>Channel</th>
+              <th>Profile</th>
               <th>Status</th>
               <th>Signal monitor</th>
               <th>Video monitor</th>
@@ -37,7 +38,6 @@
               <th>Audio monitor</th>
               <th>Audio status</th>
               <th>Enable</th>
-              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -51,7 +51,10 @@
                     <label id='location-{{ item.id }}' type='text' name='location-{{ item.id}}' value='{{item.location}}'>{{item.location}}
                   </td>
                   <td>
-                    <label id='channle-{{item.id}}' type='text' value='{{item.profile.channel}}'>{{item.channel}}</label>
+                    <label id='channle-{{ item.id }}' type='text' value='{{item.channel}}'>{{item.channel}}</label>
+                  </td>
+                  <td>
+                    <label id='profle-{{item.id}}' type='text' value='{{item.quality}}'>{{item.quality}}</label>
                   </td>
                   <td>
                     <div class="content_center" >

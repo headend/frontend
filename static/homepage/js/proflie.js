@@ -106,6 +106,11 @@ function sync_audmonitor(id, val){
     }
 }
 
+function sycn_label(name,id,val){
+    $('#'+name+'-'+id).empty();
+    $('#'+name+'-'+id).append(val);
+}
+
 function update_status(){
     var sync = function(){
         $.get('/monitor/upstatus/',function(result,status){
@@ -119,6 +124,10 @@ function update_status(){
                  sync_audstatus(dicts.id, dicts.audstatus);
                  sync_sigmonitor(dicts.id, dicts.sigmonitor);
                  sync_isenable(dicts.id, dicts.isenable);
+                 sycn_label("location",dicts.id, dicts.location);
+                 sycn_label("ipmulticast",dicts.id, dicts.mulip);
+                 sycn_label("channle",dicts.id, dicts.channel);
+                 sycn_label("profle",dicts.id, dicts.quality);
              });
         }
     });
