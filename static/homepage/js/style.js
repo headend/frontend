@@ -60,7 +60,7 @@ function agentUpdate(select_obj) {
       msg = "Monitor:\t"+ result.monitor.msg+"\n"+"Signal:\t"+result.signal.msg+"\nVideo:\t"+result.video.msg+"\nAudio:\t"+result.audio.msg;
       alert(msg);
       console.log(result);
-      // location.reload();
+      location.reload();
     }).fail(function(){
       $('#loading').hide();
       alert("Not connect to server")

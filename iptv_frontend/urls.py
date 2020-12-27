@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 import agent
 import iptvprofile
-from agent import views
+from iptvprofile import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
