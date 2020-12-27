@@ -115,6 +115,7 @@ function update_status(){
     var sync = function(){
         $.get('/monitor/upstatus/',function(result,status){
         console.log(result);
+        // $('#loading').show();
         if (status == 'success'){
              $.each(result,function(index,dicts){
                  sync_status(dicts.id,dicts.status);
