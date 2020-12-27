@@ -57,8 +57,13 @@ function agentUpdate(select_obj) {
   if (confirm("You update this agent?")){
     $.post("/agents/update/", data, function(result){
       $('#loading').hide();
-      alert(result);
-      location.reload();
+      msg = "Monitor:\t"+ result.monitor.msg+"\n"+"Signal:\t"+result.signal.msg+"\nVideo:\t"+result.video.msg+"\nAudio:\t"+result.audio.msg;
+      alert(msg);
+      console.log(result);
+      // location.reload();
+    }).fail(function(){
+      $('#loading').hide();
+      alert("Not connect to server")
     });  
   }
   else {

@@ -27,23 +27,52 @@ def updateAgent(request):
             "agent_id": agent.id,
             "control_id": None,
             "TunnelData": ""} 
-            respo = {}
+            respo = {'monitor':{'msg':'No change'}, 'signal':{'msg':'No change'}, 'audio':{'msg':'No change'}, 'video':{'msg': 'No change'}}
             if agent.is_monitor != request.POST.get('monitor'):
-                respo["monitor"] = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('monitor')])
-            else:
-                respo["monitor"] = "No change"
-            if agent.signal_monitor == request.POST.get('signal'):
-                respo["signal"] = pushWorker(data=data,host=WORKER["host"],uri=WORKER["signal"][request.POST.get('signal')]) 
-            else:
-                respo["signal"] = "No change"
-            if agent.video_monitor == request.POST.get('video'):
-                respo["video"] = pushWorker(data=data,host=WORKER["host"],uri=WORKER["video"][request.POST.get('video')])
-            else:
-                respo["video"] = "No change"
-            if agent.audio_monitor == request.POST.get('audio'):
-                respo["audio"] = pushWorker(data=data,host=WORKER["host"],uri=WORKER["audio"][request.POST.get('audio')])
-            else:
-                respo["audio"] = "No change"
+                tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('monitor')])
+                try:
+                    tmp =json.loads(tmp)
+                    # print(tmp['return_code'])
+                    if tmp['return_code'] == 1:
+                        respo["monitor"]["msg"]= "Successed"
+                    else:
+                        respo['monitor']['msg'] = tmp['return_message']
+                except Exception as e:
+                    respo["monitor"]["msg"]= "Have error"
+               # print(respo)
+            if agent.signal_monitor != request.POST.get('signal'):
+                tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["signal"][request.POST.get('signal')]) 
+                try:
+                    tmp =json.loads(tmp)
+                    # print("signal {0}".format(tmp))
+                    if tmp['return_code'] == 1:
+                        respo["signal"]["msg"]= "Successed"
+                    else:
+
+                        respo["signal"]["msg"]= tmp['return_message']
+                except Exception as e:
+                    respo["signal"]["msg"]= "Have error"
+            if agent.video_monitor != request.POST.get('video'):
+                tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["video"][request.POST.get('video')])
+                try:
+                    tmp =json.loads(tmp)
+                    # print("video {0}".format(tmp))
+                    if tmp['return_code'] == 1:
+                        respo['video']['msg'] = "Successed"
+                    else:
+                        respo["video"]["msg"]= tmp['return_message']
+                except Exception as e:
+                    respo["video"]["msg"]= "Have error"
+            if agent.audio_monitor != request.POST.get('audio'):
+                tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["audio"][request.POST.get('audio')])
+                try:
+                    tmp =json.loads(tmp)
+                    if tmp['return_code'] == 1:
+                        respo['audio']['msg'] = "Successed"
+                    else:
+                        respo["audio"]["msg"]= tmp['return_message']
+                except Exception as e:
+                    respo["audio"]["msg"]= "Have error"
             agent.status = request.POST.get('status', '')
             agent.location = request.POST.get('location', '')
             agent.is_alarm = request.POST.get('alarm', '')
@@ -51,9 +80,9 @@ def updateAgent(request):
             agent.video_monitor = request.POST.get('video', '')
             agent.audio_monitor = request.POST.get('audio', '')
             agent.run_thread = request.POST.get('thread', 0)
-            agent.save()
-            print("is monitor {0}".format(respo["monitor"]))
-            return HttpResponse("update ok",status=200, content_type="application/text")
+            # agent.save()
+            # print("is monitor {0}".format(respo["monitor"]))
+            return HttpResponse(json.dumps(respo), status=200, content_type="application/json")
         except Exception as e:
             print(e)
             return HttpResponse(status=500)
@@ -63,17 +92,17 @@ def updateAgent(request):
 def pushWorker(data,host,uri):
     import requests, json
     url = "{0}{1}".format(host, uri)
-    print (url)
+    # print (url)
     try:
         res = requests.post(url=url, data=json.dumps(data))
         if res.status_code ==200:
-            print(res.content)
-            return res.status_code
+            return res.content
         else:
             return res.status_code
     except Exception as e:
         print(e)
         return 500
+
 @csrf_exempt
 def deleteAgent(request, id):
     if request.method == "DELETE":
