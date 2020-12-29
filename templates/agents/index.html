@@ -12,7 +12,7 @@
 </div>
 <ul class="app-breadcrumb breadcrumb side">
   <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
-  <li class="breadcrumb-item">Agnets</li>
+  <li class="breadcrumb-item">Agents</li>
   <li class="breadcrumb-item active"><a href="/monitor/">Monitor</a></li>
 </ul>
 </div>
@@ -124,10 +124,10 @@
                   <td>
                     <div class="content_center">
                     {% if aid.status == 1 %}
-                       <i id="status-{{aid.id}}" class='bi-x-circle-fill'></i>
+                       <i id="status-{{aid.id}}" class='bi-check-circle-fill'></i>
                         <!-- <input id="status-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" > -->
                     {% else %}
-                      <i id="status-{{aid.id}}" class='bi-check-circle-fill'></i>
+                      <i id="status-{{aid.id}}" class='bi-x-circle-fill'></i>
                     {% endif %}
                     </div>
                   </td>
