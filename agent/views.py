@@ -8,6 +8,7 @@ from datetime import timedelta
 from agent.models import Agent
 from iptv_frontend.config import WORKER
 import json
+from django.db.models import F
 
 
 def index(request):
@@ -117,3 +118,10 @@ def deleteAgent(request, id):
             return HttpResponse("Have Error", status=500)
     return HttpResponse("Have Error",status=500)
 # Create your views here.
+def updateStatus(request):
+    if request.method == "GET":
+        data = list(Agent.objects.values('id','location','status',ip=F('ip_control'),ismonitor=F('is_monitor'), sigmonitor=F('signal_monitor'),vidmonitor=F('video_monitor'),audmontior=F('audio_monitor'),thread=F('run_thread')))
+        # print(json.dumps(data))
+        return HttpResponse(json.dumps(data), status=200, content_type='application/json')
+    else:
+        return HttpResponse(500)

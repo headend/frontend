@@ -113,7 +113,7 @@
                     <input disabled id='location-{{ aid.id }}' type='text' value='{{aid.location}}'>
                   </td>
                   <td>
-                    <div class="content_center">
+                    <div  class="content_center">
                     {% if aid.is_monitor == 1 %}
                         <input id="monitor-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" >
                     {% else %}
@@ -122,7 +122,7 @@
                     </div>
                   </td>
                   <td>
-                    <div class="content_center">
+                    <div  class="content_center">
                     {% if aid.status == 1 %}
                        <i id="status-{{aid.id}}" class='bi-check-circle-fill'></i>
                         <!-- <input id="status-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" > -->
@@ -205,4 +205,6 @@
     </div>
   </div>
 </div> <!-- end row  -->
+<script src=/static/homepage/js/jquery-3.2.1.min.js></script>
+<script src="/static/homepage/js/agents.js"></script>
 {% endblock %}

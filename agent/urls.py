@@ -21,4 +21,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('update/', views.updateAgent, name='update'),
     path('delete/<int:id>', views.deleteAgent, name='delete'),
+    path('upstatus/', views.updateStatus, name='upstatus'),
 ]
