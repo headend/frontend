@@ -24,4 +24,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('agents/', include('agent.urls')),
     path('monitor/', include('iptvprofile.urls')),
+    path('profile/', include('iptvprofile.profile_urls')),
 ]
