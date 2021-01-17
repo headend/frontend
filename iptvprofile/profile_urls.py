@@ -22,4 +22,5 @@ urlpatterns = [
     path('upstatus/', views.updateStatus, name='sync'),
     path('get4create/', views.getDataForAdd, name='dataforcreate'),
     path('newprofile/', views.addNewProfile, name='addprofile'),
+    path('delete/<int:id>', views.deleteProfile, name='delete'),
     ]

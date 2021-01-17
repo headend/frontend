@@ -125,8 +125,55 @@ function loadForeignKey(){
      e.preventDefault();
      $.post('/profile/newprofile/', frmdata, function(reult){
          console.log(reult);
+         $('#lbl-message').removeAttr('class');
+         $('#lbl-message').addClass('text-success');
+         $('#lbl-message').text("Success");
+         $('#msgModal').modal('toggle');
+         location.reload();
      }).fail(function (resulf,msg,xhr){
          console.log(resulf.responseText, msg, xhr);
+         $('#lbl-message').removeAttr('class');
+         $('#lbl-message').addClass('text-danger');
+         $('#lbl-message').text(resulf.responseText);
+         $('#msgModal').modal('toggle');
      });
     console.log(frmdata);
 });
+
+function showModalMsg(msg, cls){
+    $('#lbl-message').removeAttr('class');
+    $('#lbl-message').addClass(cls);
+    $('#lbl-message').text(msg);
+    $('#msgModal').modal('toggle');
+}
+
+function deleteProfile(select_obj) {
+  $('#loading').show();
+  if (confirm("You delelte this profile: "+select_obj)){
+      $.ajax({
+        url:"/profile/delete/"+select_obj,
+        method: 'DELETE',
+        contentType: 'application/json',
+        success: function(result,status) {
+            // handle success
+            console.log(status);
+            // alert(status);
+            showModalMsg(msg=status,'text-success')
+            $('#loading').hide();
+            // location.reload()
+        },
+        error: function(request,status,error) {
+            // handle failure
+            // alert(msg);
+            showModalMsg(msg=status,'text-danger')
+            $('#loading').hide();
+        }
+    });
+      $('#msgModal .close').click(function (e){
+          e.preventDefault();
+          location.reload();
+      });
+  }else{
+      $('#loading').hide();
+  }
+}

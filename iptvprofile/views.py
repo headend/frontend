@@ -14,6 +14,7 @@ from django.db.models import F
 import json
 
 # Create your views here.
+@csrf_exempt
 def index(request):
     template = loader.get_template('iptvprofile/index.html')
     data = Monitor.objects.select_related('agent','profile').values('id','status',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),channel=F('profile__channel__name'),
@@ -26,7 +27,7 @@ def index(request):
         'data': data
     }
     return HttpResponse(template.render(context, request))
-
+@csrf_exempt
 def profile(request):
     template = loader.get_template('iptvprofile/profile.html')
     data = Profile.objects.values('id','desc',date_cr=F('date_create'),date_up=F('date_update'),quality=F('profile_quality__quality'), p_channel=F('channel__name'), mulip=F('multicast_ip__ip'),
@@ -36,7 +37,7 @@ def profile(request):
         'data': data
     }
     return HttpResponse(template.render(context, request))
-
+@csrf_exempt
 def getId(request):
     if request.method == "GET":
         data= list(Monitor.objects.values('id'))
@@ -45,7 +46,7 @@ def getId(request):
         # return HttpResponse('sdfdf',status=200)
     else:
         return HttpResponse(status=500)
-
+@csrf_exempt
 def updateStatus(request):
     if request.method == "GET":
         data = list(Monitor.objects.select_related('agent','profile').values('id','status',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),channel=F('profile__channel__name'),
@@ -56,7 +57,7 @@ def updateStatus(request):
     else:
         return HttpResponse(status=500)
     # return JsonResponse(data=data, safe=False)
-
+@csrf_exempt
 def getDataForAdd(request):
     if request.method == "GET":
         data = {
@@ -86,7 +87,7 @@ def getDataForAdd(request):
             print(e)
         print(json.dumps(data))
         return HttpResponse(json.dumps(data), status=200, content_type="application/json")
-    return HtpResponse(status=404)
+    return HttpResponse(status=404)
 
 @csrf_exempt
 def addNewProfile(request):
@@ -109,3 +110,17 @@ def addNewProfile(request):
             print(e)
             return HttpResponse("Profile have existed!", status=406, content_type="application/text")
     return HttpResponse(status=404)
+
+@csrf_exempt
+def deleteProfile(request, id):
+    if request.method == "DELETE":
+        print(type(id))
+        try:
+            agent = Profile.objects.get(id=id)
+            agent.delete()
+            msg = "Profile {0} was deleted".format(id)
+            return HttpResponse(msg,status=201, content_type="application/text")
+        except Exception as e:
+            print (e)
+            return HttpResponse("Have Error", status=500)
+    return HttpResponse("Have Error",status=500)
