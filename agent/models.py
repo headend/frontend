@@ -26,6 +26,7 @@ class Agent(models.Model):
     date_create = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     date_update = models.DateTimeField(blank=True, auto_now=True, null=True)
     status = models.BooleanField(default=False, null=True)
+    version = models.CharField(max_length=5, null=True)
     class Meta:
         managed = True
         db_table = 'agent'
