@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channel',
     'iptvresource',
-    # 'device',
+    'device',
     'agent',
-    'iptvprofile'
+    'iptvprofile',
+    'monitor_logs'
 ]
 
 MIDDLEWARE = [
