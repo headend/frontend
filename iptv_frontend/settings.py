@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channel',
     'iptvresource',
-    'device',
+    # 'device',
     'agent',
     'iptvprofile'
 ]

@@ -20,7 +20,7 @@ import iptvprofile
 from iptvprofile import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('iptv/public/add/min/', admin.site.urls),
     path('', views.index, name='index'),
     path('agents/', include('agent.urls')),
     path('monitor/', include('iptvprofile.urls')),
