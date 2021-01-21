@@ -2,7 +2,7 @@
 # into hours, minutes and seconds 
   
 def convert_seconds_to_day(seconds): 
-	days = seconds // (24 * 3600)
+    days = seconds // (24 * 3600)
     seconds = seconds % (24 * 3600)
     hour = seconds // 3600
     seconds %= 3600
