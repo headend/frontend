@@ -34,12 +34,12 @@ function getAgentColumn(select_id) {
     "ram": $('#ram-'+select_id).text(),
     "disk": $('#disk-'+select_id).text(),
     "location": $('#location-'+select_id).val(),
-    "monitor": $('#monitor-'+select_id).prop("checked") ? 1 : 0,
-    "status": $('#status-'+select_id).prop("checked") ? 1 : 0,
-    "alarm": $('#alarm-'+select_id).prop("checked") ? 1 : 0,
-    "signal": $('#signal-'+select_id).prop("checked") ? 1 : 0,
-    "video": $('#video-'+select_id).prop("checked") ? 1 : 0,
-    "audio": $('#audio-'+select_id).prop("checked") ? 1 : 0,
+    "monitor": $('#monitor-'+select_id).is(":checked") ? 1 : 0,
+    "status": $('#status-'+select_id).is(":checked") ? 1 : 0,
+    "alarm": $('#alarm-'+select_id).is(":checked") ? 1 : 0,
+    "signal": $('#signal-'+select_id).is(":checked") ? 1 : 0,
+    "video": $('#video-'+select_id).is(":checked") ? 1 : 0,
+    "audio": $('#audio-'+select_id).is(":checked") ? 1 : 0,
     "thread": $('#thread-'+select_id).val(),
   };
   console.log(data);
