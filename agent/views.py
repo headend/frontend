@@ -120,7 +120,7 @@ def deleteAgent(request, id):
 # Create your views here.
 def updateStatus(request):
     if request.method == "GET":
-        data = list(Agent.objects.values('id','location','status',ip=F('ip_control'),ismonitor=F('is_monitor'), sigmonitor=F('signal_monitor'),vidmonitor=F('video_monitor'),audmontior=F('audio_monitor'),thread=F('run_thread')))
+        data = list(Agent.objects.values('id','location','status',ip=F('ip_control'),ismonitor=F('is_monitor'), sigmonitor=F('signal_monitor'),vidmonitor=F('video_monitor'),audmonitor=F('audio_monitor'),thread=F('run_thread')))
         # print(json.dumps(data))
         return HttpResponse(json.dumps(data), status=200, content_type='application/json')
     else:

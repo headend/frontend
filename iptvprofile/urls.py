@@ -20,5 +20,8 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('mid/', views.getId, name='getId'),
-    path('upstatus/', views.updateStatus, name='sync')
+    path('upstatus/', views.updateStatus, name='sync'),
+    path('get4create/', views.getData4AddMonitor, name='dataforcreate'),
+    path('newmonitor/', views.addNewMonitor, name='crate new monitor'),
+    path('delete/<int:id>', views.deleteMontior, name='delete'),
 ]
