@@ -17,7 +17,7 @@ function sync_status(id, val){
 }
 
 function sync_button(name, id, val){
-    // console.log(val)
+    // console.log(name+id+"-"+val);
     if (val == 1){
         $('#'+name+'-'+id).prop('checked', true);
         $('#'+name+'-'+id).parent().removeClass('btn-danger off');
