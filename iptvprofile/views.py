@@ -24,8 +24,9 @@ def index(request):
     quality=F('profile__profile_quality__quality'),
     ).order_by('status', '-date_update')
     for monitor in data:
-        monitor['downtime'] = convert_seconds_to_day(caculate_distance(monitor['date_update'])) if not monitor['status'] else ''
-        monitor['date_update'] = monitor['date_update'].strftime("%Y/%m/%d %H:%M:%S") if monitor['date_update'] else ''
+        if monitor['date_update']:
+            monitor['downtime'] = convert_seconds_to_day(caculate_distance(monitor['date_update'])) if not monitor['status'] else ''
+            monitor['date_update'] = monitor['date_update'].strftime("%Y/%m/%d %H:%M:%S") if monitor['date_update'] else ''
     context = {
         'data': data
     }
@@ -57,8 +58,9 @@ def updateStatus(request):
         quality=F('profile__profile_quality__quality'),
         ).order_by('status', '-date_update'))
         for monitor in data:
-            monitor['downtime'] = convert_seconds_to_day(caculate_distance(monitor['date_update'])) if not monitor['status'] else ''
-            monitor['date_update'] = monitor['date_update'].strftime("%Y/%m/%d %H:%M:%S") if monitor['date_update'] else ''
+            if monitor['date_update']:
+                monitor['downtime'] = convert_seconds_to_day(caculate_distance(monitor['date_update'])) if not monitor['status'] else ''
+                monitor['date_update'] = monitor['date_update'].strftime("%Y/%m/%d %H:%M:%S") if monitor['date_update'] else ''
         return HttpResponse(json.dumps(data),status=200,content_type="application/json")
     else:
         return HttpResponse(status=500)

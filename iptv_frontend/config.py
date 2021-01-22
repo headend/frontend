@@ -1,5 +1,5 @@
 WORKER={
-    "host":"http://localhost:8888",
+    "host":"http://49.213.66.119:443",
     "worker":{
         "1":"/api/v1/ctl/127.0.0.1/master/start-worker",
         "0":"/api/v1/ctl/127.0.0.1/master/stop-worker",

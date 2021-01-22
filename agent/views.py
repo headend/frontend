@@ -38,7 +38,8 @@ def updateAgent(request):
             "control_id": None,
             "TunnelData": ""} 
             respo = {'monitor':{'msg':'No change'}, 'signal':{'msg':'No change'}, 'audio':{'msg':'No change'}, 'video':{'msg': 'No change'}}
-            if agent.is_monitor != bool(int(request.POST.get('monitor'))):
+            is_monitor = True if agent.is_monitor else False
+            if is_monitor != bool(int(request.POST.get('monitor'))):
                 tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["worker"][request.POST.get('monitor')])
                 try:
                     tmp =json.loads(tmp)
@@ -50,7 +51,8 @@ def updateAgent(request):
                 except Exception as e:
                     respo["monitor"]["msg"]= "Have error"
                # print(respo)
-            if agent.signal_monitor != bool(int(request.POST.get('signal'))):
+            signal_monitor = True if agent.signal_monitor else False
+            if signal_monitor != bool(int(request.POST.get('signal'))):
                 tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["signal"][request.POST.get('signal')]) 
                 try:
                     tmp =json.loads(tmp)
@@ -62,7 +64,8 @@ def updateAgent(request):
                         respo["signal"]["msg"]= tmp['return_message']
                 except Exception as e:
                     respo["signal"]["msg"]= "Have error"
-            if agent.video_monitor != bool(int(request.POST.get('video'))):
+            video_monitor = True if agent.video_monitor else False
+            if video_monitor != bool(int(request.POST.get('video'))):
                 tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["video"][request.POST.get('video')])
                 try:
                     tmp =json.loads(tmp)
@@ -73,7 +76,8 @@ def updateAgent(request):
                         respo["video"]["msg"]= tmp['return_message']
                 except Exception as e:
                     respo["video"]["msg"]= "Have error"
-            if agent.audio_monitor != bool(int(request.POST.get('audio'))):
+            audio_monitor = True if agent.audio_monitor else False
+            if audio_monitor != bool(int(request.POST.get('audio'))):
 
                 tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["audio"][request.POST.get('audio')])
                 try:
