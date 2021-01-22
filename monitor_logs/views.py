@@ -17,7 +17,7 @@ def get_monitor_logs_object():
     result = None
     result = MonitorLogs.objects.values('id','agent_id','profile_id','monitor_id','channel_id','channel_name','multicast_ip','before_status','after_status','desc','date_create').order_by('-date_create')[:300]
     for monitor_log in result:
-        if monitor_log.date_create
+        if monitor_log.date_create:
             monitor_log.distance = convert_seconds_to_day(caculate_distance(monitor_log.date_create))
             monitor_log.date_create = monitor_log.date_create.strftime("%Y/%m/%d %H:%M:%S")
         else:
