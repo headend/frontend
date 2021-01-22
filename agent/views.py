@@ -33,7 +33,7 @@ def updateAgent(request):
     if request.method == 'POST':
         try:
             agent_id = request.POST.get('id')
-            agent = Agent.objects.get(agent_id)
+            agent = Agent.objects.get(id=agent_id)
             agent.location = request.POST.get('location', '')
             agent.save()
             data= {    
