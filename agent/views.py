@@ -32,9 +32,9 @@ def index(request):
 def updateAgent(request):
     if request.method == 'POST':
         try:
-            agent = Agent.objects.get(id=request.POST.get('id'))
+            agent_id = request.POST.get('id')
             data= {    
-            "agent_id": agent.id,
+            "agent_id": agent_id,
             "control_id": None,
             "TunnelData": ""} 
             respo = {'monitor':{'msg':'No change'}, 'signal':{'msg':'No change'}, 'audio':{'msg':'No change'}, 'video':{'msg': 'No change'}}
@@ -85,6 +85,7 @@ def updateAgent(request):
                 except Exception as e:
                     respo["audio"]["msg"]= "Have error"
             # agent.status = request.POST.get('status', '')
+            agent = Agent.objects.get(agent_id)
             agent.location = request.POST.get('location', '')
             # agent.is_alarm = request.POST.get('alarm', '')
             # agent.signal_monitor = request.POST.get('signal', '')
