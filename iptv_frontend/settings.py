@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'iptvresource',
     'device',
     'agent',
-    'iptvprofile'
+    'iptvprofile',
+    'monitor_logs'
 ]
 
 MIDDLEWARE = [

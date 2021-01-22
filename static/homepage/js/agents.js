@@ -17,7 +17,7 @@ function sync_status(id, val){
 }
 
 function sync_button(name, id, val){
-    // console.log(val)
+    // console.log(name+id+"-"+val);
     if (val == 1){
         $('#'+name+'-'+id).prop('checked', true);
         $('#'+name+'-'+id).parent().removeClass('btn-danger off');
@@ -60,6 +60,8 @@ function update_status(){
                  sync_label("ipcontrol",dicts.id, dicts.ip);
                  sync_text('location', dicts.id, dicts.location);
                  sync_text('thread', dicts.id, dicts.thread);
+                 sync_label("downtime",dicts.id, dicts.downtime);
+                 sync_label("version",dicts.id, dicts.version);
              });
         }
     });

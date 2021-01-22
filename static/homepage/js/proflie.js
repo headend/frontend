@@ -1,138 +1,179 @@
 $(document).ready(function() {
-    update_status();
+    loadForeignKey();
 });
-
-function sync_status(id, val){
-    // console.log(val)
-    if (val == 1){
-        $('#status-'+id).removeClass("bi-check-circle-fill");
-        $('#status-'+id).removeClass("bi-x-circle-fill");
-        $('#status-'+id).addClass("bi-check-circle-fill");
-    }
-    else {
-        $('#status-'+id).removeClass("bi-check-circle-fill");
-        $('#status-'+id).removeClass("bi-x-circle-fill"); 
-        $('#status-'+id).addClass("bi-x-circle-fill");
-    }
+function loadSelectQuality(lstValuses){
+    $.each(lstValuses, function(index,values){
+        // console.log(values.id);
+        $('#frm-add-quality').prop('selectedIndex',0);
+        if($('#frm-add-quality').find("option[value='"+values.id+"']").length){
+            $('#frm-add-quality').trigger('change');
+         }else{ 
+             $('#frm-add-quality').append($('<option>', {
+                 value:values.id,
+                 text: values.quality,
+             }));
+             $('#frm-add-quality').trigger('change');
+        }
+         console.log($('#frm-add-quality').val());
+    });
 }
-
-function sync_vidstatus(id, val){
-    // console.log(val)
-    if (val == 1){
-        $('#vidstatus-'+id).removeClass("bi-check-circle-fill");
-        $('#vidstatus-'+id).removeClass("bi-x-circle-fill");
-        $('#vidstatus-'+id).addClass("bi-check-circle-fill");
-        // console.log(id)
-    }
-    else {
-        $('#vidstatus-'+id).removeClass("bi-check-circle-fill");
-        $('#vidstatus-'+id).removeClass("bi-x-circle-fill"); 
-        $('#vidstatus-'+id).addClass("bi-x-circle-fill");
-    }
+function loadSelectChannle(lstValuses){
+    $.each(lstValuses, function(index,values){
+        // console.log(values.id);
+        $('#frm-add-channel').prop('selectedIndex',0);
+        if($('#frm-add-channel').find("option[value='"+values.id+"']").length){
+            $('#frm-add-channel').trigger('change');
+         }else{ 
+             $('#frm-add-channel').append($('<option>', {
+                 value:values.id,
+                 text: values.name,
+             }));
+             $('#frm-add-channel').trigger('change');
+        }
+         console.log($('#frm-add-channel').val());
+    });
 }
-
-function sync_audstatus(id, val){
-    // console.log(val)
-    if (val == 1){
-        $('#audstatus-'+id).removeClass("bi-check-circle-fill");
-        $('#audstatus-'+id).removeClass("bi-x-circle-fill");
-        $('#audstatus-'+id).addClass("bi-check-circle-fill");
-        // console.log(id)
-    }
-    else {
-        $('#audstatus-'+id).removeClass("bi-check-circle-fill");
-        $('#audstatus-'+id).removeClass("bi-x-circle-fill"); 
-        $('#audstatus-'+id).addClass("bi-x-circle-fill");
-    }
+function loadSelectVlan(lstValuses){
+    $.each(lstValuses, function(index,values){
+        // console.log(values.id);
+        $('#frm-add-vlan').prop('selectedIndex',0);
+        if($('#frm-add-vlan').find("option[value='"+values.id+"']").length){
+            $('#frm-add-vlan').trigger('change');
+         }else{ 
+             $('#frm-add-vlan').append($('<option>', {
+                 value:values.id,
+                 text: values.vlanid,
+             }));
+             $('#frm-add-vlan').trigger('change');
+        }
+         // console.log($('#frm-add-vlan').val());
+    });
 }
-
-function sync_isenable(id, val){
-    // console.log(val)
-    if (val == 1){
-        $('#isenable-'+id).removeClass("bi-check-circle-fill");
-        $('#isenable-'+id).removeClass("bi-x-circle-fill");
-        $('#isenable-'+id).addClass("bi-check-circle-fill");
-        // console.log(id)
-    }
-    else {
-        $('#isenable-'+id).removeClass("bi-check-circle-fill");
-        $('#isenable-'+id).removeClass("bi-x-circle-fill"); 
-        $('#isenable-'+id).addClass("bi-x-circle-fill");
-    }
+function loadSelectMulticast(lstValuses){
+    $.each(lstValuses, function(index,values){
+        // console.log(values.id);
+        $('#frm-add-mulip').prop('selectedIndex',0);
+        if($('#frm-add-mulip').find("option[value='"+values.id+"']").length){
+            $('#frm-add-mulip').trigger('change');
+         }else{ 
+             $('#frm-add-mulip').append($('<option>', {
+                 value:values.id,
+                 text: values.ip,
+             }));
+             $('#frm-add-mulip').trigger('change');
+        }
+         // console.log($('#frm-add-mulip').val());
+    });
 }
-
-function sync_sigmonitor(id, val){
-    // console.log(val)
-    if (val == 1){
-        $('#sigmonitor-'+id).removeClass("bi-toggle-off");
-        $('#sigmonitor-'+id).removeClass("bi-toggle-on");
-        $('#sigmonitor-'+id).addClass("bi-toggle-on");
-        // console.log(id)
-    }
-    else {
-        $('#sigmonitor-'+id).removeClass("bi-toggle-off");
-        $('#sigmonitor-'+id).removeClass("bi-toggle-on"); 
-        $('#sigmonitor-'+id).addClass("bi-toggle-off");
-    }
+function loadSelectStatus(lstValuses){
+    $.each(lstValuses, function(index,values){
+        $('#frm-add-status').prop('selectedIndex',0);
+        if($('#frm-add-status').find("option[value='"+values.state+"']").length){
+            $('#frm-add-status').trigger('change');
+         }else{ 
+             $('#frm-add-status').append($('<option>', {
+                 value:values.state,
+                 text: values.name,
+             }));
+             $('#frm-add-status').trigger('change');
+        }
+         // console.log($('#frm-add-status').val());
+    });
 }
-
-function sync_vidmonitor(id, val){
-    // console.log(val)
-    if (val == 1){
-        $('#vidmonitor-'+id).removeClass("bi-toggle-off");
-        $('#vidmonitor-'+id).removeClass("bi-toggle-on");
-        $('#vidmonitor-'+id).addClass("bi-toggle-on");
-        // console.log(id)
-    }
-    else {
-        $('#vidmonitor-'+id).removeClass("bi-toggle-off");
-        $('#vidmonitor-'+id).removeClass("bi-toggle-on"); 
-        $('#vidmonitor-'+id).addClass("bi-toggle-off");
-    }
-}
-
-function sync_audmonitor(id, val){
-    // console.log(val)
-    if (val == 1){
-        $('#audmonitor-'+id).removeClass("bi-toggle-off");
-        $('#audmonitor-'+id).removeClass("bi-toggle-on");
-        $('#audmonitor-'+id).addClass("bi-toggle-on");
-        // console.log(id)
-    }
-    else {
-        $('#audmonitor-'+id).removeClass("bi-toggle-off");
-        $('#audmonitor-'+id).removeClass("bi-toggle-on"); 
-        $('#audmonitor-'+id).addClass("bi-toggle-off");
-    }
-}
-
-function sycn_label(name,id,val){
-    $('#'+name+'-'+id).empty();
-    $('#'+name+'-'+id).append(val);
-}
-
-function update_status(){
-    var sync = function(){
-        $.get('/monitor/upstatus/',function(result,status){
-        console.log(result);
-        // $('#loading').show();
-        if (status == 'success'){
-             $.each(result,function(index,dicts){
-                 sync_status(dicts.id,dicts.status);
-                 sync_vidstatus(dicts.id, dicts.vidstatus);
-                 sync_vidmonitor(dicts.id,dicts.vidmonitor);
-                 sync_audmonitor(dicts.id, dicts.audmonitor);
-                 sync_audstatus(dicts.id, dicts.audstatus);
-                 sync_sigmonitor(dicts.id, dicts.sigmonitor);
-                 sync_isenable(dicts.id, dicts.isenable);
-                 sycn_label("location",dicts.id, dicts.location);
-                 sycn_label("ipmulticast",dicts.id, dicts.mulip);
-                 sycn_label("channle",dicts.id, dicts.channel);
-                 sycn_label("profle",dicts.id, dicts.quality);
-             });
+function loadSelectEncoder(lstValuses){
+    $.each(lstValuses, function(index,values){
+        console.log(values.id);
+        $('#frm-add-encoder').prop('selectedIndex',0);
+        if($('#frm-add-encoder').find("option[value='"+values.state+"']").length){
+            $('#frm-add-encoder').trigger('change');
+         }else{
+             $('#frm-add-encoder').append($('<option>', {
+                 value:values.id,
+                 text: values.name,
+             }));
+             $('#frm-add-encoder').trigger('change');
         }
     });
-    };
-    setInterval(sync,10000);
-    // setTimeout(sync, 2000);
+}
+function loadForeignKey(){
+    $.get("/profile/get4create/", function(result, status){
+        // console.log(status);
+      }).done(function(result){
+        console.log(result.Encoder);
+        loadSelectChannle(result.Channel);
+        loadSelectQuality(result.Quality);
+        loadSelectMulticast(result.MulCastIp);
+        loadSelectVlan(result.Vlan);
+        loadSelectStatus(result.State);
+        loadSelectEncoder(result.Encoder);
+      }).fail(function(result, textStatus, xhr){
+        console.log(result.status, textStatus, xhr);
+      }); 
+    // loadDataSelect("frm-add-vlan");
+}
+
+ $('#btnnewprofile-form-submit').on('click',function(e) {
+     frmdata= {
+         "quality": $('#frm-add-quality').val(),
+         'channel': $('#frm-add-channel').val(),
+         'mulcast': $('#frm-add-mulip').val(),
+         'vlan': $('#frm-add-vlan').val(),
+         'status': $('#frm-add-status').val(),
+         'encoder': $('#frm-add-encoder').val(),
+         'desc': $('#frm-add-desc').val(),
+     };
+     e.preventDefault();
+     $.post('/profile/newprofile/', frmdata, function(reult){
+         console.log(reult);
+         $('#lbl-message').removeAttr('class');
+         $('#lbl-message').addClass('text-success');
+         $('#lbl-message').text("Success");
+         $('#msgModal').modal('toggle');
+         location.reload();
+     }).fail(function (resulf,msg,xhr){
+         console.log(resulf.responseText, msg, xhr);
+         $('#lbl-message').removeAttr('class');
+         $('#lbl-message').addClass('text-danger');
+         $('#lbl-message').text(resulf.responseText);
+         $('#msgModal').modal('toggle');
+     });
+    console.log(frmdata);
+});
+
+function showModalMsg(msg, cls){
+    $('#lbl-message').removeAttr('class');
+    $('#lbl-message').addClass(cls);
+    $('#lbl-message').text(msg);
+    $('#msgModal').modal('toggle');
+}
+
+function deleteProfile(select_obj) {
+  $('#loading').show();
+  if (confirm("You delelte this profile: "+select_obj)){
+      $.ajax({
+        url:"/profile/delete/"+select_obj,
+        method: 'DELETE',
+        contentType: 'application/json',
+        success: function(result,status) {
+            // handle success
+            console.log(status);
+            // alert(status);
+            showModalMsg(msg=status,'text-success')
+            $('#loading').hide();
+            // location.reload()
+        },
+        error: function(request,status,error) {
+            // handle failure
+            // alert(msg);
+            showModalMsg(msg=status,'text-danger')
+            $('#loading').hide();
+        }
+    });
+      $('#msgModal .close').click(function (e){
+          e.preventDefault();
+          location.reload();
+      });
+  }else{
+      $('#loading').hide();
+  }
 }

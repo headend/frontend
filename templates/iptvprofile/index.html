@@ -20,7 +20,12 @@
 </div>
 
 <div class="row">
-  <div class="clearix"></div>
+  <div class="clearix col-md-12">
+     <button id="btnNew" name="addnew" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModal">
+         <span class="glyphicon glyphicon-add" aria-hidden="true"></span>
+         <span><strong>Add</strong></span>
+     </button>
+  </div>
   <div class="col-md-12">
     <div class="tile">
       <div class="tile-body">
@@ -38,6 +43,8 @@
               <th>Audio monitor</th>
               <th>Audio status</th>
               <th>Enable</th>
+              <th>Downtime</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +55,7 @@
                     <label id="ipmulticast-{{ item.id }}" name="ipcontrol-{{ item.id }}">{{ item.mulip }}</label>
                   </td>
                   <td>
-                    <label id='location-{{ item.id }}' type='text' name='location-{{ item.id}}' value='{{item.location}}'>{{item.location}}
+                      <label id='location-{{ item.id }}' type='text' name='location-{{ item.id}}' value='{{item.location}}'>{{item.location}}</label>
                   </td>
                   <td>
                     <label id='channle-{{ item.id }}' type='text' value='{{item.channel}}'>{{item.channel}}</label>
@@ -119,6 +126,21 @@
                       {% endif %}
                     </div>
                   </td>
+                  <td>
+                      <label id='downtime-{{ item.id }}' type='text' name='downtime-{{ item.id}}'>{{item.downtime}}</label>
+                  </td>
+                  <td>
+                    <div class="form-inline">
+                     <button id="btnDelete-{{ item.id }}" name="delete" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleModal" onclick="deleteMonitor({{ item.id }});">
+                       <span class="glyphicon glyphicon-del" aria-hidden="true"></span>
+                       <span><strong>Delete</strong></span>
+                     </button>
+{#                     <button id="btnUpdate-{{ item.id }}" name="update" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateModal">#}
+{#                       <span class="glyphicon glyphicon-update" aria-hidden="true"></span>#}
+{#                       <span><strong>Update</strong></span>#}
+{#                     </button>#}
+                   </div>
+                  </td>
                  </tr>
               {% endfor %}      
           <!-- barse data agent --> 
@@ -126,8 +148,98 @@
         </table>
       </div>
     </div>
+        <!-- modal create monitor -->
+      <form id="newprofile-form" action="/monitor/newmonitor/" method="post" onSubmit="alert()">
+      <div class="modal fade" id="addModal">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add New Monitor</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-profile'>Profile:</label>
+                  <div class="col-sm-9">
+                  <select class="form-control" id='frm-add-profile'>
+                    <option value='0' selected>Select Profile</option>
+                    </select>
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-agent'>Agent:</label>
+                  <div class="col-sm-9">
+                  <select class="form-control" id='frm-add-agent'>
+                    <option value="0" selected>Select Agent</option>
+                  </select>
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class='col-sm-3 form-label' for='frm-add-status'>Status:</label>
+                  <div class="col-sm-9">
+                    <select id='frm-add-status' class="form-control">
+                      <option value='0' selected>Status</option>
+                      </select>
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='chkEnable'>Enable</label>
+                  <div class="col-sm-9">
+                      <input id="chkEnable" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle">
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-audio'>Audio:</label>
+                  <div class="col-sm-9">
+                      <input id="chkAudio" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle">
+                  </div>
+               </div>
+                <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-video'>Video:</label>
+                  <div class="col-sm-9">
+                      <input id="chkVideo" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle">
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-signal'>Signal:</label>
+                  <div class="col-sm-9">
+                      <input id="chkSignal" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle">
+                  </div>
+               </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <input id="btnnewmontior-form-submit" type="submit" class="btn btn-primary" data-dismiss="modal" value="Submit">
+            </div>
+         </div>
+        </div>
+      </div>
+      </form>
+         <!-- modal alert -->
+      <div class="modal fade" id="msgModal">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Message</h4>
+                <button type="button" class="closed close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <label id="lbl-message" class="warning"></label>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="closed btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </div> <!-- end row  -->
  <script src=/static/homepage/js/jquery-3.2.1.min.js></script>
- <script src="/static/homepage/js/proflie.js"></script>
+ <script src="/static/homepage/js/monitor.js"></script>
 {% endblock %}

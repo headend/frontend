@@ -50,7 +50,12 @@
     </div>  End title 
   </div> -->
 
-  <div class="clearix"></div>
+  <div class="clearix col-md-12">
+     <button id="btnNew" name="addnew" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModal">
+         <span class="glyphicon glyphicon-add" aria-hidden="true"></span>
+         <span><strong>Add</strong></span>
+     </button>
+  </div>
   <div class="col-md-12">
     <div class="tile">
       <div class="tile-body">
@@ -71,6 +76,8 @@
               <th>Video monitor</th>
               <th>Audio monitor</th>
               <th>Thread</th>
+              <th>Version</th>
+              <th>Downtime</th>
               <!-- <th>Create</th>
               <th>Update</th> -->
               <th>Edit</th>
@@ -110,7 +117,7 @@
                     {% endif %}
                   </td> -->
                   <td>
-                    <input disabled id='location-{{ aid.id }}' type='text' value='{{aid.location}}'>
+                    <input id='location-{{ aid.id }}' type='text' value='{{aid.location}}'>
                   </td>
                   <td>
                     <div  class="content_center">
@@ -142,7 +149,7 @@
                   <td>
                     <div class="content_center">
                     {% if aid.signal_monitor == 1 %}
-                        <input id="signal-{{ aid.id }}" type="checkbox" checked  data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger "data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="signal-{{ aid.id }}" type="checkbox"  data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger "data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                     
                         <input id="signal-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
@@ -170,6 +177,12 @@
                   </td>
                   <td>
                      <input type="number" id="thread-{{ aid.id }}" name="thread-{{ aid.id }}" value="{{ aid.run_thread }}" min="1" max="20">
+                  </td>
+                  <td>
+                    <label id='version-{{ aid.id }}'>{{aid.version}}</label>
+                  </td>
+                  <td>
+                    <label id='downtime-{{ aid.id }}'>{{aid.downtime}}</label>
                   </td>
                   <!-- <td>
                     {% if aid.date_create == None %}
@@ -203,6 +216,84 @@
         </table>
       </div>
     </div>
+      <!-- modal create profile -->
+      <form id="newprofile-form" action="/upstatus/" method="post" onSubmit="alert()">
+      <div class="modal fade" id="addModal">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add New Profile</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-channel'>Channel Name:</label>
+                  <div class="col-sm-9">
+                  <select class="form-control" id='frm-add-channel' placeholder="Channel Name">
+                    <option value='0' selected>Channel Name</option>
+                    </select>
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-quality'>Quality:</label>
+                  <div class="col-sm-9">
+                  <select class="form-control" id='frm-add-quality' placeholder="Quality 2M,4M" >
+                    <option value="0" selected>Quality 2M,4M</option>
+                  </select>
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class='col-sm-3 form-label' for='frm-add-status'>Status:</label>
+                  <div class="col-sm-9">
+                    <select id='frm-add-status' class="form-control">
+                      <option value='0' selected>Status</option>
+                      </select>
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-vlan'>Vlan:</label>
+                  <div class="col-sm-9">
+                  <select class="form-control" id='frm-add-vlan' >
+                    <option value="0" selected>Select Vlan</option>
+                  </select>
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-mulip'>MulticastIP:</label>
+                  <div class="col-sm-9">
+                  <select class="form-control" id='frm-add-mulip'>
+                    <option value="0" selected>Select IP</option>
+                  </select>
+                  </div>
+               </div>
+                <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-encoder'>Encoder:</label>
+                  <div class="col-sm-9">
+                  <select class="form-control" id='frm-add-encoder'>
+                    <option value="0" selected>Select encoder</option>
+                  </select>
+                  </div>
+               </div>
+               <div class='form-group row'>
+                  <label class="col-sm-3 form-label" for='frm-add-desc'>Description:</label>
+                  <div class="col-sm-9">
+                  <textarea id='frm-add-desc' rows="5" cols="40" >
+                  </textarea>
+                  </div>
+               </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <input id="btnnewprofile-form-submit" type="submit" class="btn btn-primary" data-dismiss="modal" value="Submit">
+            </div>
+         </div>
+        </div>
+      </div>
+      </form>
+
   </div>
 </div> <!-- end row  -->
 <script src=/static/homepage/js/jquery-3.2.1.min.js></script>

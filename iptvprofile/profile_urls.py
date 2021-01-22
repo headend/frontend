@@ -18,10 +18,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('mid/', views.getId, name='getId'),
+    path('', views.profile, name='index'),
     path('upstatus/', views.updateStatus, name='sync'),
-    path('get4create/', views.getData4AddMonitor, name='dataforcreate'),
-    path('newmonitor/', views.addNewMonitor, name='crate new monitor'),
-    path('delete/<int:id>', views.deleteMontior, name='delete'),
-]
+    path('get4create/', views.getDataForAdd, name='dataforcreate'),
+    path('newprofile/', views.addNewProfile, name='addprofile'),
+    path('delete/<int:id>', views.deleteProfile, name='delete'),
+    ]
