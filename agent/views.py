@@ -8,12 +8,21 @@ from datetime import timedelta
 from agent.models import Agent
 from iptv_frontend.config import WORKER
 import json
-from django.db.models import F
+from django.db.models import F 
+from utils import convert_seconds_to_day, caculate_distance
+
 
 
 def index(request):
     template = loader.get_template('agents/index.html')
-    data = Agent.objects.all()
+    data = Agent.objects.all().order_by('-date_update')
+    for agent in data:
+        if not agent.status:
+            agent.downtime = convert_seconds_to_day(caculate_distance(agent.date_update))
+        else:
+            agent.downtime = ""
+        agent.version = agent.version if agent.version else ""
+        agent.date_update = agent.date_update.strftime("%Y/%m/%d %H:%M:%S") if agent.date_update else ''
     context = {
         'data': data
     }
@@ -121,8 +130,11 @@ def deleteAgent(request, id):
 # Create your views here.
 def updateStatus(request):
     if request.method == "GET":
-        data = list(Agent.objects.values('id','location','status',ip=F('ip_control'),ismonitor=F('is_monitor'), sigmonitor=F('signal_monitor'),vidmonitor=F('video_monitor'),audmonitor=F('audio_monitor'),thread=F('run_thread')))
+        data = list(Agent.objects.values('id','location','status','date_update','version',ip=F('ip_control'),ismonitor=F('is_monitor'), sigmonitor=F('signal_monitor'),vidmonitor=F('video_monitor'),audmonitor=F('audio_monitor'),thread=F('run_thread')))
         # print(json.dumps(data))
+        for agent in data:
+            agent['downtime'] = convert_seconds_to_day(caculate_distance(agent['date_update'])) if not agent['status'] else ''
+            agent['date_update'] = agent['date_update'].strftime("%Y/%m/%d %H:%M:%S")
         return HttpResponse(json.dumps(data), status=200, content_type='application/json')
     else:
         return HttpResponse(500)

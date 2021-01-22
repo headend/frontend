@@ -43,6 +43,7 @@
               <th>Audio monitor</th>
               <th>Audio status</th>
               <th>Enable</th>
+              <th>Downtime</th>
               <th>Edit</th>
             </tr>
           </thead>
@@ -124,6 +125,9 @@
                         <i id="isenable-{{item.id}}" class='bi-x-circle-fill'></i>
                       {% endif %}
                     </div>
+                  </td>
+                  <td>
+                      <label id='downtime-{{ item.id }}' type='text' name='downtime-{{ item.id}}'>{{item.downtime}}</label>
                   </td>
                   <td>
                     <div class="form-inline">

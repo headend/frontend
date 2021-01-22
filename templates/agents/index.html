@@ -76,6 +76,8 @@
               <th>Video monitor</th>
               <th>Audio monitor</th>
               <th>Thread</th>
+              <th>Version</th>
+              <th>Downtime</th>
               <!-- <th>Create</th>
               <th>Update</th> -->
               <th>Edit</th>
@@ -175,6 +177,12 @@
                   </td>
                   <td>
                      <input type="number" id="thread-{{ aid.id }}" name="thread-{{ aid.id }}" value="{{ aid.run_thread }}" min="1" max="20">
+                  </td>
+                  <td>
+                    <label id='version-{{ aid.id }}'>{{aid.version}}</label>
+                  </td>
+                  <td>
+                    <label id='downtime-{{ aid.id }}'>{{aid.downtime}}</label>
                   </td>
                   <!-- <td>
                     {% if aid.date_create == None %}
