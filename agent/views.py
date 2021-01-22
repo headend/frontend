@@ -33,6 +33,9 @@ def updateAgent(request):
     if request.method == 'POST':
         try:
             agent_id = request.POST.get('id')
+            agent = Agent.objects.get(agent_id)
+            agent.location = request.POST.get('location', '')
+            agent.save()
             data= {    
             "agent_id": agent_id,
             "control_id": None,
@@ -88,16 +91,6 @@ def updateAgent(request):
                         respo["audio"]["msg"]= tmp['return_message']
                 except Exception as e:
                     respo["audio"]["msg"]= "Have error"
-            # agent.status = request.POST.get('status', '')
-            agent = Agent.objects.get(agent_id)
-            agent.location = request.POST.get('location', '')
-            # agent.is_alarm = request.POST.get('alarm', '')
-            # agent.signal_monitor = request.POST.get('signal', '')
-            # agent.video_monitor = request.POST.get('video', '')
-            # agent.audio_monitor = request.POST.get('audio', '')
-            # agent.run_thread = request.POST.get('thread', 0)
-            agent.save()
-            # print("is monitor {0}".format(respo["monitor"]))
             return HttpResponse(json.dumps(respo), status=200, content_type="application/json")
         except Exception as e:
             print(e)
