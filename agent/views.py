@@ -37,7 +37,7 @@ def updateAgent(request):
             agent.location = request.POST.get('location', '')
             agent.save()
             data= {    
-            "agent_id": agent_id,
+            "agent_id": agent.id,
             "control_id": None,
             "TunnelData": ""} 
             respo = {'monitor':{'msg':'No change'}, 'signal':{'msg':'No change'}, 'audio':{'msg':'No change'}, 'video':{'msg': 'No change'}}
