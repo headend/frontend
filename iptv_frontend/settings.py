@@ -82,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'iptv',
-        'HOST': '127.0.0.1',
+        'HOST': '172.17.0.3',
         'PORT': 3306,
         'USER': 'root',
         'PASSWORD': '123456',
