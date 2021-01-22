@@ -17,8 +17,11 @@ def get_monitor_logs_object():
     result = None
     result = MonitorLogs.objects.values('id','agent_id','profile_id','monitor_id','channel_id','channel_name','multicast_ip','before_status','after_status','desc','date_create').order_by('-date_create')[:300]
     for monitor_log in result:
-        monitor_log.distance = convert_seconds_to_day(caculate_distance(monitor_log.date_create))
-        monitor_log.date_create = monitor_log.date_create.strftime("%Y/%m/%d %H:%M:%S")
+        if monitor_log.date_create
+            monitor_log.distance = convert_seconds_to_day(caculate_distance(monitor_log.date_create))
+            monitor_log.date_create = monitor_log.date_create.strftime("%Y/%m/%d %H:%M:%S")
+        else:
+            monitor_log.date_create = ""
     return result
 
 def index(request):
@@ -33,7 +36,6 @@ def index(request):
         'channels': channels,
         'multicast_ips': multicast_ips
     }
-    print(context)
     return HttpResponse(template.render(context, request))
 
 # Create your views here.
