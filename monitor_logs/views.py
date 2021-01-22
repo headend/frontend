@@ -10,14 +10,14 @@ from channel.models import Channel
 from iptvresource.models import MulticastIp
 import json
 from django.db.models import F
-from utils import convert_seconds_to_day
+from utils import convert_seconds_to_day, caculate_distance
 import datetime
 
 def get_monitor_logs_object():
     result = None
     result = MonitorLogs.objects.values('id','agent_id','profile_id','monitor_id','channel_id','channel_name','multicast_ip','before_status','after_status','desc','date_create').order_by('-date_create')[:300]
     for monitor_log in result:
-        monitor_log.distance = convert_seconds_to_day(datetime.datetime.now().strftime("%s")- monitor_log.date_create.strftime("%s"))
+        monitor_log.distance = convert_seconds_to_day(caculate_distance(monitor_log.date_create))
         monitor_log.date_create = monitor_log.date_create.strftime("%Y/%m/%d %H:%M:%S")
     return result
 
