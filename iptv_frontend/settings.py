@@ -79,6 +79,8 @@ WSGI_APPLICATION = 'iptv_frontend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+<<<<<<< HEAD
+=======
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -90,11 +92,16 @@ WSGI_APPLICATION = 'iptv_frontend.wsgi.application'
 #     }
 # }
 
+>>>>>>> 1cf7e43808aca6d2990511f365a1d3030f75b72b
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'iptv',
+<<<<<<< HEAD
+        'HOST': '172.17.0.3',
+=======
         'HOST': '127.0.0.2',
+>>>>>>> 1cf7e43808aca6d2990511f365a1d3030f75b72b
         'PORT': 3306,
         'USER': 'root',
         'PASSWORD': '123456',
