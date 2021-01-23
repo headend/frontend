@@ -62,6 +62,7 @@
         <table class="table table-hover table-bordered" id="dataTable">
           <thead>
             <tr>
+              <th>ID</th>
               <th>IP</th>
               <!-- <th>IP-RMulticast</th> -->
               <!-- <th>Vlan</th> -->
@@ -87,6 +88,9 @@
           <!-- barse data agent -->
               {% for aid in data %}
               <tr>
+                  <td>
+                    <label id="ipcontrol-{{ aid.id }}" name="ipcontrol-{{ aid.id }}">{{ aid.id }}</label>
+                  </td>
                   <td>
                     <label id="ipcontrol-{{ aid.id }}" name="ipcontrol-{{ aid.id }}">{{ aid.ip_control }}</label>
                   </td>
