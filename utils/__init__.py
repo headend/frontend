@@ -1,4 +1,5 @@
 import datetime
+import time
 # Python Program to Convert seconds 
 # into hours, minutes and seconds 
   
@@ -12,5 +13,9 @@ def convert_seconds_to_day(seconds):
     return "%dd %02dh:%02dm:%02ds" % (days, hour, minutes, seconds)
 
 def caculate_distance(date_update):
-    now = datetime.datetime.now().strftime("%s")
-    return int(now) - int(date_update.strftime("%s"))
+    now = int(datetime.datetime.now().strftime("%s")) - time.timezone
+    #print("Timezone %d"%(time.timezone))
+    #print("Db %s"%(str(date_update)))
+    #print("Now %s"%(now))
+    #print("Db %s"%(date_update.strftime("%s")))
+    return now - (int(date_update.strftime("%s")) - time.timezone)
