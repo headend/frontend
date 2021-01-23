@@ -153,7 +153,7 @@
                   <td>
                     <div class="content_center">
                     {% if aid.signal_monitor == 1 %}
-                        <input id="signal-{{ aid.id }}" type="checkbox"  data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger "data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="signal-{{ aid.id }}" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger "data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                     
                         <input id="signal-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
