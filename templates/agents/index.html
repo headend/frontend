@@ -51,10 +51,10 @@
   </div> -->
 
   <div class="clearix col-md-12">
-     <button id="btnNew" name="addnew" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModal">
+<!--      <button id="btnNew" name="addnew" type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addModal">
          <span class="glyphicon glyphicon-add" aria-hidden="true"></span>
          <span><strong>Add</strong></span>
-     </button>
+     </button> -->
   </div>
   <div class="col-md-12">
     <div class="tile">
@@ -62,6 +62,7 @@
         <table class="table table-hover table-bordered" id="dataTable">
           <thead>
             <tr>
+              <th>ID</th>
               <th>IP</th>
               <!-- <th>IP-RMulticast</th> -->
               <!-- <th>Vlan</th> -->
@@ -76,6 +77,8 @@
               <th>Video monitor</th>
               <th>Audio monitor</th>
               <th>Thread</th>
+              <th>Version</th>
+              <th>Downtime</th>
               <!-- <th>Create</th>
               <th>Update</th> -->
               <th>Edit</th>
@@ -85,6 +88,9 @@
           <!-- barse data agent -->
               {% for aid in data %}
               <tr>
+                  <td>
+                    <label id="ipcontrol-{{ aid.id }}" name="ipcontrol-{{ aid.id }}">{{ aid.id }}</label>
+                  </td>
                   <td>
                     <label id="ipcontrol-{{ aid.id }}" name="ipcontrol-{{ aid.id }}">{{ aid.ip_control }}</label>
                   </td>
@@ -147,7 +153,7 @@
                   <td>
                     <div class="content_center">
                     {% if aid.signal_monitor == 1 %}
-                        <input id="signal-{{ aid.id }}" type="checkbox"  data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger "data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
+                        <input id="signal-{{ aid.id }}" type="checkbox" checked data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger "data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
                     {% else %}
                     
                         <input id="signal-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" onchange="onChangeCheckBox(this.id);">
@@ -175,6 +181,12 @@
                   </td>
                   <td>
                      <input type="number" id="thread-{{ aid.id }}" name="thread-{{ aid.id }}" value="{{ aid.run_thread }}" min="1" max="20">
+                  </td>
+                  <td>
+                    <label id='version-{{ aid.id }}'>{{aid.version}}</label>
+                  </td>
+                  <td>
+                    <label id='downtime-{{ aid.id }}'>{{aid.downtime}}</label>
                   </td>
                   <!-- <td>
                     {% if aid.date_create == None %}

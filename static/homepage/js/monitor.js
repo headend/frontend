@@ -130,6 +130,7 @@ function update_status(){
                  sycn_label("ipmulticast",dicts.id, dicts.mulip);
                  sycn_label("channle",dicts.id, dicts.channel);
                  sycn_label("profle",dicts.id, dicts.quality);
+                 sycn_label("downtime",dicts.id, dicts.downtime);
              });
         }
     });

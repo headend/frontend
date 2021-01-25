@@ -13,17 +13,20 @@ from device.models import Encoder
 from agent.models import Agent
 from django.db.models import F
 import json
+from utils import convert_seconds_to_day, caculate_distance
 
 # Create your views here.
 @csrf_exempt
 def index(request):
     template = loader.get_template('iptvprofile/index.html')
-    data = Monitor.objects.select_related('agent','profile').values('id','status',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),channel=F('profile__channel__name'),
+    data = Monitor.objects.select_related('agent','profile').values('id','status','date_update',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),channel=F('profile__channel__name'),
     sigmonitor=F("signal_monitor"),vidmonitor=F('video_monitor'),vidstatus=F('status_video'),audmonitor=F('audio_monitor'), audstatus=F('status_audio'),isenable=F('is_enable'),
     quality=F('profile__profile_quality__quality'),
-    )
-    # data = list(data)
-    # print(data)
+    ).order_by('status', '-date_update')
+    for monitor in data:
+        if monitor['date_update']:
+            monitor['downtime'] = convert_seconds_to_day(caculate_distance(monitor['date_update'])) if not monitor['status'] else ''
+            monitor['date_update'] = monitor['date_update'].strftime("%Y/%m/%d %H:%M:%S") if monitor['date_update'] else ''
     context = {
         'data': data
     }
@@ -50,10 +53,14 @@ def getId(request):
 @csrf_exempt
 def updateStatus(request):
     if request.method == "GET":
-        data = list(Monitor.objects.select_related('agent','profile').values('id','status',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),channel=F('profile__channel__name'),
+        data = list(Monitor.objects.select_related('agent','profile').values('id','status','date_update',location=F('agent__location'),mulip=F('profile__multicast_ip__ip'),channel=F('profile__channel__name'),
         sigmonitor=F("signal_monitor"),vidmonitor=F('video_monitor'),vidstatus=F('status_video'),audmonitor=F('audio_monitor'), audstatus=F('status_audio'),isenable=F('is_enable'),
         quality=F('profile__profile_quality__quality'),
-        ))
+        ).order_by('status', '-date_update'))
+        for monitor in data:
+            if monitor['date_update']:
+                monitor['downtime'] = convert_seconds_to_day(caculate_distance(monitor['date_update'])) if not monitor['status'] else ''
+                monitor['date_update'] = monitor['date_update'].strftime("%Y/%m/%d %H:%M:%S") if monitor['date_update'] else ''
         return HttpResponse(json.dumps(data),status=200,content_type="application/json")
     else:
         return HttpResponse(status=500)

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- <script type="text/javascript" src="/static/homepage/js/angular.min.js"></script>
+ -->
+ <!-- <link rel="stylesheet" href="/static/homepage/css/bootstrap-multiselect.css">
+<script src="/static/homepage/js/bootstrap-multiselect.js"></script> -->
+<link rel="stylesheet" href="/static/homepage/css/icon.css">
+<div class="app-title">
+<div>
+  <h1><i class="fa fa-th-list"></i><a href="/log/"> Log</a></h1>
+  
+</div>
+<ul class="app-breadcrumb breadcrumb side">
+  <li class="breadcrumb-item"><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
+  <li class="breadcrumb-item">Log</li>
+  <li class="breadcrumb-item active"><a href="/log/">Monitor Logs</a></li>
+</ul>
+</div>
+
+<div class="row">
+  <!-- filter -->
+  <div class="col-md-12">
+    <div class="tile">
+      <form class="row" id="frmreport" name="frmreport" method="POST">
+        <div class="form-group col-md-3">
+          <select class="form-control" id="channels" name="channels">
+            {% for channel in channels %}
+            <option selected value="{{ channel.id }}">{{ channel.name }}</option>
+            {% endfor %}
+            <option selected value="">---Choose Channel---</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <select class="form-control" id="agents" name="agents">
+              {% for agent in agents %}
+                <option selected value="{{ agent.id }}">{{ agent.ip_control }} - {{ agent.location }}</option>
+              {% endfor %}
+                <option selected value="">---Choose Agentd---</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <select class="form-control" id="mips" name="mips">
+              {% for mip in multicast_ips %}
+                <option selected value="{{ mip.id }}">{{ mip.ip }}</option>
+              {% endfor %}
+                <option selected value="">---Choose Multicast IP---</option>
+            </select>
+        </div>    
+
+        <div class="form-group col-md-3 align-self-end">
+            <button class="btn btn-sm btn-primary" type="button" onclick="logSearch()"><i class="fa fa-fw fa-lg fa-check-circle"></i>Search</button>
+        </div>
+    
+<!--         <div class="form-group col-md-3 align-self-end">
+            <button class="btn btn-sm btn-primary" type="button" onclick="reportlevelexport()"><i class="fa fa-fw fa-lg fa-check-circle"></i>Export</button>
+        </div> -->
+      </form>
+    </div> <!-- End filter -->
+  </div>
+  <!-- Parse data -->
+  <div class="col-md-12">
+    <div class="tile">
+      <div class="tile-body">
+        <table class="table table-hover table-bordered" id="dataTable">
+          <thead>
+            <tr>
+              <th>Agent</th>
+              <th>Channel name</th>
+              <th>Multicast ip</th>
+              <th>Before status</th>
+              <th>Status</th>
+              <th>Desc</th>
+              <th>Date create</th>
+              <th>Distance</th>
+            </tr>
+          </thead>
+          <tbody>
+          <!-- barse data agent -->
+              {% for log in data %}
+              <tr>
+                  <td>
+                    <label id="agentid-{{ log.id }}" name="agentid-{{ log.agent_id }}">{{ log.agent_id }}</label>
+                  </td>
+                  <td>
+                    <label id="channelname-{{ log.id }}" name="channelname-{{ log.channel_id }}">{{ log.channel_name }}</label>
+                  </td>
+                  <td>
+                    <label id="multicastip-{{ log.id }}" name="multicastip-{{ log.multicast_ip }}">{{ log.multicast_ip }}</label>
+                  </td>
+                  <td>
+                    <label id="beforestatus-{{ log.id }}" name="beforestatus-{{ log.before_status }}">{{ log.before_status }}</label>
+                  </td>
+
+                  <td>
+                    <div  class="content_center">
+                    {% if log.after_status == 1 %}
+                       <i id="status-{{log.id}}" class='bi-check-circle-fill'></i>
+                        <!-- <input id="status-{{ aid.id }}" type="checkbox" data-width="50" data-height="25" data-onstyle="success" data-offstyle="danger" checked data-toggle="toggle" onchange="onChangeCheckBox(this.id);" > -->
+                    {% else %}
+                      <i id="status-{{log.id}}" class='bi-x-circle-fill'></i>
+                    {% endif %}
+                    </div>
+                  </td>
+                  <td>
+                    <label id="desc-{{ log.id }}" name="desc-{{ log.id }}">{{ log.desc }}</label>
+                  </td>
+                  <td>
+                    <label id="datecreate-{{ log.id }}" name="datecreate-{{ log.id }}">{{ log.date_create }}</label>
+                  </td>
+                  <td>
+                    <label id="distance-{{ log.id }}" name="distanse-{{ log.id }}">{{ log.distance }}</label>
+                  </td>
+                </tr>
+              {% endfor %}      
+          <!-- barse data agent --> 
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> <!-- end row  -->
+<script src=/static/homepage/js/jquery-3.2.1.min.js></script>
+<!-- <script src="/static/homepage/js/agents.js"></script> -->
+{% endblock %}
