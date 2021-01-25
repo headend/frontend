@@ -134,7 +134,7 @@ function update_status(){
         }
     });
     };
-    // setInterval(sync,10000);
+    setInterval(sync,10000);
     // setTimeout(sync, 2000);
 }
 
