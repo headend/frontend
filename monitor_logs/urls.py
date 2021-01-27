@@ -19,5 +19,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-
+    path('search/', views.load_filter, name='filter'),
 ]
