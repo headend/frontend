@@ -3,11 +3,23 @@ $(document).ready(function (){
 });
 
 function logSearch(){
-    channle=$('#channels').val();
-    agent = $('#agents').val();
-    multiip = $('#mips').val();
-    console.log("channel: "+ channle+"agent: "+agent+"muips: "+multiip);
-    loadDataLogs()
+    data= {
+        'channel': $('#channels').val(),
+        'agent': $('#agents').val(),
+        'multiip': $('#mips').val(),
+    }
+    console.log(data);
+    $.post('search/', data, function (result){
+        console.log(result);
+        $("#tblogs").empty();
+        $.each(result, function (index, value){
+            addNewRow(value.id, value.agent_id, value.channel_name, value.multicast_ip, value.before_status, value.after_status,
+                value.desc, value.date_create, value.distance);
+        });
+    }).fail(function (result, status, xhr){
+        console.log("filter search have error!");
+    });
+    // loadDataLogs()
 }
 
 
@@ -41,8 +53,8 @@ function addNewRow(id, agent, channel, multicast, before_status, after_status, d
 
 }
 function loadDataLogs(){
-    $("#tblogs").empty();
     console.log("loaddata...");
     addNewRow(1,'HCM','VTV3HD','255.255.1.1','ok',1,'123','','');
     addNewRow(2,'HCM','VTV3HD','255.255.1.1','ok',0,'123','','');
+
 }
