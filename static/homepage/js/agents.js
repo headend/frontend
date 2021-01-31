@@ -58,6 +58,7 @@ function update_status(){
                  sync_button('audio',dicts.id, dicts.audmonitor);
                  sync_button('signal',dicts.id, dicts.sigmonitor);
                  sync_label("ipcontrol",dicts.id, dicts.ip);
+                 sync_label("id",dicts.id, dicts.id);
                  sync_text('location', dicts.id, dicts.location);
                  sync_text('thread', dicts.id, dicts.thread);
                  sync_label("downtime",dicts.id, dicts.downtime);
