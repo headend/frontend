@@ -22,79 +22,7 @@ function get_timestamp() {
   // body...
   return Math.floor(new Date().getTime()/1000.0)
 }
-function execute_update_agent(){
 
-}
-function getAgentColumn(select_id) {
-  data = {
-    "id": select_id,
-    "ip_control": $('#ipcontrol-'+select_id).text(),
-    "ip_receive_multicast": $('#ipmulticast-'+select_id).text(),
-    "cpu": $('#cpu-'+select_id).text(),
-    "ram": $('#ram-'+select_id).text(),
-    "disk": $('#disk-'+select_id).text(),
-    "location": $('#location-'+select_id).val(),
-    "monitor": $('#monitor-'+select_id).is(":checked") ? 1 : 0,
-    "status": $('#status-'+select_id).is(":checked") ? 1 : 0,
-    "alarm": $('#alarm-'+select_id).is(":checked") ? 1 : 0,
-    "signal": $('#signal-'+select_id).is(":checked") ? 1 : 0,
-    "video": $('#video-'+select_id).is(":checked") ? 1 : 0,
-    "audio": $('#audio-'+select_id).is(":checked") ? 1 : 0,
-    "thread": $('#thread-'+select_id).val(),
-  };
-  console.log(data);
-  return data;
-}
-
-function onChangeCheckBox(select_obj) {
-  var tmp = $('#'+select_obj).is(":checked");
-  $('#'+select_obj).prop('checked', tmp); 
-}
-
-function agentUpdate(select_obj) {
-  data = getAgentColumn(select_obj);
-  $('#loading').show();
-  if (confirm("You update this agent?")){
-    $.post("/agents/update/", data, function(result){
-      $('#loading').hide();
-      msg = "Monitor:\t"+ result.monitor.msg+"\n"+"Signal:\t"+result.signal.msg+"\nVideo:\t"+result.video.msg+"\nAudio:\t"+result.audio.msg;
-      alert(msg);
-      console.log(result);
-      location.reload();
-    }).fail(function(){
-      $('#loading').hide();
-      alert("Not connect to server")
-    });  
-  }
-  else {
-    var txt = "Cancel";
-    $('#loading').hide();
-    alert(txt);
-  }
-}
-
-function agentDete(select_obj) {
-  $('#loading').show();
-  if (confirm("You delelte this agent: "+select_obj)){
-      $.ajax({
-        url:"/agents/delete/"+select_obj,
-        method: 'DELETE',
-        contentType: 'application/json',
-        success: function(result,status) {
-            // handle success
-            console.log(status);
-            alert(status);
-            $('#loading').hide();
-            location.reload();
-        },
-        error: function(request,msg,error) {
-            // handle failure
-            alert(msg);
-            $('#loading').hide();
-        }
-    });
-  }
-}
 function changeDatetime(sync) {
 	var data;
 	if (sync == true) {
