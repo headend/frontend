@@ -81,7 +81,6 @@ def updateAgent(request):
                     respo["video"]["msg"]= "Have error"
             audio_monitor = True if agent.audio_monitor else False
             if audio_monitor != bool(int(request.POST.get('audio'))):
-
                 tmp = pushWorker(data=data,host=WORKER["host"],uri=WORKER["audio"][request.POST.get('audio')])
                 try:
                     tmp =json.loads(tmp)
@@ -91,6 +90,7 @@ def updateAgent(request):
                         respo["audio"]["msg"]= tmp['return_message']
                 except Exception as e:
                     respo["audio"]["msg"]= "Have error"
+            # print(json.dumps(respo))
             return HttpResponse(json.dumps(respo), status=200, content_type="application/json")
         except Exception as e:
             print(e)
